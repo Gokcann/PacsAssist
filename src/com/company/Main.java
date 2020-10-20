@@ -167,7 +167,8 @@ class JTableExamples{
 
 
         for (int i = 0 ; i<dataList.size();i++) {
-            if( dataList.get(i).PatientsIDV2.equals("53713748738") ){
+            //185174 *******  186062 ******* 27217  *******   242157  ******* 26   *******   223492   **********
+            if( dataList.get(i).PatientsIDV2.equals("223492") ){
                 
                 patient.add(i);
 //                System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
