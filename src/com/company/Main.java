@@ -1,7 +1,6 @@
 package com.company;
 
 import com.sun.net.httpserver.HttpHandler;
-import com.sun.tools.javac.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.http.HttpTimeoutException;
+
 import java.rmi.activation.ActivationGroupDesc;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -25,9 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 import java.io.*;
 
 class JTableExamples{
@@ -204,7 +201,7 @@ class JTableExamples{
         //ArrayList<StudyData> dataList2 = new ArrayList<>();
         List<Integer> patient = new ArrayList<Integer>();
         //query.MwlQuery(response.QueryProcessMethod().toString());
-        dataList=query.StudyQueryParse(response.QueryProcessMethod(url).toString());
+        dataList=query.StudyQueryParse(response.QueryProcessMethod(url,patientId).toString());
 
 
 
@@ -252,7 +249,7 @@ class JTableExamples{
                 result[i][12] = dataList.get(patient.get(i)).StudyInstanceUIDV2.toString();
                 result[i][13] = dataList.get(patient.get(i)).StudyIDV2.toString();
                 result[i][14] = dataList.get(patient.get(i)).NumberofStudyRelatedSeriesV2.toString();
-                result[i][15] = dataList.get(patient.get(i)).NumberofStudyRelatedInstancesV2.toString();
+                //result[i][15] = dataList.get(patient.get(i)).NumberofStudyRelatedInstancesV2.toString();
             }
 
 

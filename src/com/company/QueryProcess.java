@@ -10,16 +10,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 import com.company.*;
 
 public class QueryProcess {
 
     private  static HttpURLConnection connection;
 
-    public StringBuffer QueryProcessMethod(String urlArgs) {
+    public StringBuffer QueryProcessMethod(String urlArgs, String patientArgs) {
 
         // ********THIS IS FIRST METHOD*******
         BufferedReader reader;
@@ -28,7 +26,7 @@ public class QueryProcess {
 
         try {
             //URL url = new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies");
-            String myURL = urlArgs + "rs/studies/";
+            String myURL = urlArgs + "rs/studies?PatientID=" + patientArgs;
             URL url = new URL(myURL);
             //http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/mwlitems
             //http://192.168.12.113:8080/dcm4chee-arc/aets/DCM4CHEE/rs/mwlitems
