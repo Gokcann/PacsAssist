@@ -19,7 +19,7 @@ public class QueryProcess {
 
     private  static HttpURLConnection connection;
 
-    public StringBuffer QueryProcessMethod() {
+    public StringBuffer QueryProcessMethod(String urlArgs) {
 
         // ********THIS IS FIRST METHOD*******
         BufferedReader reader;
@@ -28,7 +28,8 @@ public class QueryProcess {
 
         try {
             //URL url = new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies");
-            URL url = new URL("http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies/");
+            String myURL = urlArgs + "rs/studies/";
+            URL url = new URL(myURL);
             //http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/mwlitems
             //http://192.168.12.113:8080/dcm4chee-arc/aets/DCM4CHEE/rs/mwlitems
 

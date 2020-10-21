@@ -34,11 +34,12 @@ class JTableExamples{
 
     // frame
     JFrame f;
+
     // Table
     //JTable j;
 
     // Constructor
-    JTableExamples(String[][] obj) throws IOException {
+    JTableExamples(String[][] obj,String urlArgs) throws IOException {
 
         Object[][] data = new Object[obj.length][16];
         //BufferedImage img = ImageIO.read(new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies/2.16.840.114421.80563.9652876562/thumbnail"));
@@ -47,11 +48,11 @@ class JTableExamples{
         for (int i=0;i<obj.length;i++) {
             String s = obj[i][12].toString();
             //BufferedImage img = ImageIO.read(new URL(CreateURL(s)));
-            URL url = new URL(CreateURL(s));
+            URL url = new URL(CreateURL(s,urlArgs));
             HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.setRequestMethod("GET");
             urlConnect.setDoOutput(true);
-            urlConnect.setReadTimeout(10000);
+            urlConnect.setReadTimeout(5000);
             /*
             try(InputStream inputStream = urlConnect.getInputStream()) {
 
@@ -71,7 +72,6 @@ class JTableExamples{
                     data[i][0] = icon;
                 }
                 break;
-
             }
 
             /*
@@ -183,15 +183,19 @@ class JTableExamples{
 
     }
 
-    public String CreateURL(String s) throws MalformedURLException {
+    public String CreateURL(String s, String url) throws MalformedURLException {
 
-        String h = "http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE_ADMIN/wado?requestType=WADO&studyUID=";
-        String u = h + s;
+
+        String h = "wado?requestType=WADO&studyUID=";
+        String u = url+ h + s;
 
         return u;
     }
 
     public static void main(String[] args) throws IOException {
+        //TODO args parse**
+        String patientId = args[0];
+        String url = args[1];
 
         StudyQuery query = new StudyQuery();
         QueryProcess response = new QueryProcess();
@@ -200,13 +204,13 @@ class JTableExamples{
         //ArrayList<StudyData> dataList2 = new ArrayList<>();
         List<Integer> patient = new ArrayList<Integer>();
         //query.MwlQuery(response.QueryProcessMethod().toString());
-        dataList=query.StudyQueryParse(response.QueryProcessMethod().toString());
+        dataList=query.StudyQueryParse(response.QueryProcessMethod(url).toString());
 
 
 
         for (int i = 0 ; i<dataList.size();i++) {
             //185174 *******  186062 ******* 27217  *******   242157  ******* 26   *******   223492   **********
-            if( dataList.get(i).PatientsIDV2.equals("27217") ){
+            if( dataList.get(i).PatientsIDV2.equals(patientId) ){
                 
                 patient.add(i);
 //                System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
@@ -252,7 +256,7 @@ class JTableExamples{
             }
 
 
-        new JTableExamples(result);
+        new JTableExamples(result,url);
 
 
 
