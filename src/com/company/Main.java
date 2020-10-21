@@ -1,5 +1,6 @@
 package com.company;
 
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.tools.javac.Main;
 
 import javax.imageio.ImageIO;
@@ -15,7 +16,9 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.http.HttpTimeoutException;
 import java.rmi.activation.ActivationGroupDesc;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.HttpURLConnection;
@@ -43,12 +46,47 @@ class JTableExamples{
         //ImageIcon[] myIcon = new ImageIcon[data.length];
         for (int i=0;i<obj.length;i++) {
             String s = obj[i][12].toString();
-            BufferedImage img = ImageIO.read(new URL(CreateURL(s)));
-            ImageIcon icon = new ImageIcon(resize(img));
+            //BufferedImage img = ImageIO.read(new URL(CreateURL(s)));
+            URL url = new URL(CreateURL(s));
+            HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
+            urlConnect.setRequestMethod("GET");
+            urlConnect.setDoOutput(true);
+            urlConnect.setReadTimeout(10000);
+            /*
+            try(InputStream inputStream = urlConnect.getInputStream()) {
+
+                BufferedImage img = ImageIO.read(urlConnect.getInputStream());
+                ImageIcon icon = new ImageIcon(resize(img));
+                data[i][0] = icon;
+            }
+            catch (Exception ex) {
+                System.out.println(ex);
+            }
+             */
+
+            while (urlConnect.getResponseCode() != HttpURLConnection.HTTP_INTERNAL_ERROR) {
+                BufferedImage img = ImageIO.read(urlConnect.getInputStream());
+                if(img != null){
+                    ImageIcon icon = new ImageIcon(resize(img));
+                    data[i][0] = icon;
+                }
+                break;
+
+            }
+
+            /*
+            BufferedImage img;
+            while (equals(img = ImageIO.read(url.openStream()))) {
+                img = ImageIO.read(url.openStream());
+                ImageIcon icon = new ImageIcon(resize(img));
+                data[i][0] = icon;
+            }
+
+             */
             //java.net.URL imgUrl = getClass().getResource(CreateURL(s));
             //ImageIcon icon = new ImageIcon(imgUrl);
             //myIcon[i] = icon;
-            data[i][0] = icon;
+
             data[i][1] = obj[i][5];
             data[i][2] = obj[i][12];
             //data[i][3] = obj[i][];
@@ -168,7 +206,7 @@ class JTableExamples{
 
         for (int i = 0 ; i<dataList.size();i++) {
             //185174 *******  186062 ******* 27217  *******   242157  ******* 26   *******   223492   **********
-            if( dataList.get(i).PatientsIDV2.equals("223492") ){
+            if( dataList.get(i).PatientsIDV2.equals("27217") ){
                 
                 patient.add(i);
 //                System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
