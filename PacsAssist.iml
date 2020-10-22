@@ -10,11 +10,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/GitHubRepo/jsonparser/json-20200518.jar!/" />
+          <root url="jar://$MODULE_DIR$/../jsonparser/json-20200518.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="win-i686" level="project" />
   </component>
 </module>

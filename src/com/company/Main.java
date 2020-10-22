@@ -1,6 +1,7 @@
 package com.company;
 
 import com.sun.net.httpserver.HttpHandler;
+import org.dcm4che3.tool.getscu.GetSCU;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,7 +37,7 @@ class JTableExamples{
     //JTable j;
 
     // Constructor
-    JTableExamples(String[][] obj,String urlArgs) throws IOException {
+    JTableExamples(String[][] obj,String urlArgs, String argIP, String argPort) throws IOException {
 
         Object[][] data = new Object[obj.length][16];
         //BufferedImage img = ImageIO.read(new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies/2.16.840.114421.80563.9652876562/thumbnail"));
@@ -150,21 +151,47 @@ class JTableExamples{
         //sadece tabloyu dinleyen click listener metodu
         j.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
+                File directoryPath = new File("C:\\PacsAssist");
+                //list of all files and directories
+                File filesList[] = directoryPath.listFiles();
+
+                for(File file : filesList) {
+
+                    file.delete();
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 if (me.getClickCount() == 1) {     // to detect doble click events
                     row[0] = j.getSelectedRow(); // select a row
                     column[0] = j.getSelectedColumn(); // select a column
                     //JOptionPane.showMessageDialog(null, j.getValueAt(row[0], 2)); // get the value of a row and column.
-                    commandString[0] = "$dicom:get -w \"http://192.168.12.132:8080/weasis-pacs-connector/manifest?studyUID=" + j.getValueAt(row[0], 2) +"\"";
+                    //commandString[0] = "$dicom:get -w \"http://localhost:8080/weasis-pacs-connector/manifest?studyUID=" + j.getValueAt(row[0], 2) +"\"";
+                    //commandString[0] = "dicom:get -r \"http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=" + j.getValueAt(row[0], 2) +"&contentType=application/dicom&transferSyntax=*\"";
                     System.out.println(commandString[0]);
+                    String id = j.getValueAt(row[0], 2).toString();
+                    String[] command3 = new String[6];
+                    command3[0] = "-c";
+                    String link = "DCM4CHEE@" + argIP + ":" + argPort ;
+                    command3[1] = link ;
+                    //command3[1] = "DCM4CHEE@192.168.12.132:11112" ;
+                    command3[2] = "-m";
+                    command3[3] = "StudyInstanceUID="+id;
+                    command3[4] = "--directory";
+                    command3[5] = "C:\\PacsAssist";
+                    GetSCU.main(command3);
                     //auto open for directory
                     //goruntuAc(commandString);
                     try {
-                        Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", commandString[0]).start();
+                        //Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", commandString[0]).start();
+                        //Process process = new ProcessBuilder("viewer-win32.exe", "$dicom:get -l \"C:/PacsAssist\"").start();
+                        Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$dicom:get -l \"C:/PacsAssist\"").start();
                         //Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe" , "$dicom:get -w \"http://192.168.12.132:8080/weasis-pacs-connector/manifest?studyUID=1.2.840.20200203.112320.022.0.192168.1282.3088\"").start();
                         //f.dispose();
-                        System.exit(0);
-
+                        //System.exit(0);
 
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -193,6 +220,8 @@ class JTableExamples{
         //TODO args parse**
         String patientId = args[0];
         String url = args[1];
+        String argIP = args[2];
+        String argPort = args[3];
 
         StudyQuery query = new StudyQuery();
         QueryProcess response = new QueryProcess();
@@ -208,7 +237,7 @@ class JTableExamples{
         for (int i = 0 ; i<dataList.size();i++) {
             //185174 *******  186062 ******* 27217  *******   242157  ******* 26   *******   223492   **********
             if( dataList.get(i).PatientsIDV2.equals(patientId) ){
-                
+
                 patient.add(i);
 //                System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
 //                System.out.println(dataList.get(i).SpecificCharacterSetV2);
@@ -233,27 +262,27 @@ class JTableExamples{
         }
         String[][] result =new String[patient.size()][16];
 
-            for (int i=0;i<patient.size();i++) {
-                result[i][0] = dataList.get(patient.get(i)).SpecificCharacterSetV2.toString();
-                result[i][1] = dataList.get(patient.get(i)).StudyDateV2.toString();
-                result[i][2] = dataList.get(patient.get(i)).AccessionNumberV2.toString();
-                result[i][3] = dataList.get(patient.get(i)).RetrieveAETitleV2.toString();
-                result[i][4] = dataList.get(patient.get(i)).InstanceAvailabilityV2.toString();
-                result[i][5] = dataList.get(patient.get(i)).ModalitiesInStudyV2.toString();
-                result[i][6] = dataList.get(patient.get(i)).ReferringPhysiciansNameV2.toString();
-                result[i][7] = dataList.get(patient.get(i)).RetrieveURLV2.toString();
-                result[i][8] = dataList.get(patient.get(i)).PatientsNameV2.toString();
-                result[i][9] = dataList.get(patient.get(i)).PatientsIDV2.toString();
-                result[i][10] = dataList.get(patient.get(i)).PatientsBirthDateV2.toString();
-                result[i][11] = dataList.get(patient.get(i)).PatientsSexV2.toString();
-                result[i][12] = dataList.get(patient.get(i)).StudyInstanceUIDV2.toString();
-                result[i][13] = dataList.get(patient.get(i)).StudyIDV2.toString();
-                result[i][14] = dataList.get(patient.get(i)).NumberofStudyRelatedSeriesV2.toString();
-                //result[i][15] = dataList.get(patient.get(i)).NumberofStudyRelatedInstancesV2.toString();
-            }
+        for (int i=0;i<patient.size();i++) {
+            result[i][0] = dataList.get(patient.get(i)).SpecificCharacterSetV2.toString();
+            result[i][1] = dataList.get(patient.get(i)).StudyDateV2.toString();
+            result[i][2] = dataList.get(patient.get(i)).AccessionNumberV2.toString();
+            result[i][3] = dataList.get(patient.get(i)).RetrieveAETitleV2.toString();
+            result[i][4] = dataList.get(patient.get(i)).InstanceAvailabilityV2.toString();
+            result[i][5] = dataList.get(patient.get(i)).ModalitiesInStudyV2.toString();
+            result[i][6] = dataList.get(patient.get(i)).ReferringPhysiciansNameV2.toString();
+            result[i][7] = dataList.get(patient.get(i)).RetrieveURLV2.toString();
+            result[i][8] = dataList.get(patient.get(i)).PatientsNameV2.toString();
+            result[i][9] = dataList.get(patient.get(i)).PatientsIDV2.toString();
+            result[i][10] = dataList.get(patient.get(i)).PatientsBirthDateV2.toString();
+            result[i][11] = dataList.get(patient.get(i)).PatientsSexV2.toString();
+            result[i][12] = dataList.get(patient.get(i)).StudyInstanceUIDV2.toString();
+            result[i][13] = dataList.get(patient.get(i)).StudyIDV2.toString();
+            result[i][14] = dataList.get(patient.get(i)).NumberofStudyRelatedSeriesV2.toString();
+            //result[i][15] = dataList.get(patient.get(i)).NumberofStudyRelatedInstancesV2.toString();
+        }
 
 
-        new JTableExamples(result,url);
+        new JTableExamples(result,url,argIP,argPort);
 
 
 
@@ -276,7 +305,7 @@ class renderer extends DefaultTableCellRenderer {
     public renderer(Icon getIcon) {
         // TODO Auto-generated constructor stub
 
-    icon = getIcon;
+        icon = getIcon;
 
     }
     Icon icon = new ImageIcon();
