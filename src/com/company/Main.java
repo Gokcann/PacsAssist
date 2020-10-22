@@ -1,45 +1,35 @@
 package com.company;
 
-import com.sun.net.httpserver.HttpHandler;
 import org.dcm4che3.tool.getscu.GetSCU;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import java.rmi.activation.ActivationGroupDesc;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-
 import java.io.*;
 
 class JTableExamples{
 
     JFrame f;
 
-    //Jtable constructor
+    //JTable constructor
     JTableExamples(String[][] obj,String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
 
         for (int i=0;i<obj.length;i++) {
             //obj nin 12. elemani study instance uid
-            String s = obj[i][12].toString();
+            String s = obj[i][12];
             //study instance uidye gore thumbnail goruntulerini veren linki olusturmak icin createurl metonuda gonderiyoruz
             URL url = new URL(CreateURL(s,urlArgs));
             //gelen url e get metoduyla baglanip gorseli okuyup bufferlıyoruz
@@ -87,8 +77,8 @@ class JTableExamples{
             public Class<?> getColumnClass(int column) {
                 switch(column) {
                     case 0: return ImageIcon.class;
-                    case 1: return Object.class;
-                    case 2: return Object.class;
+                    case 1:
+                    case 2:
                     default: return Object.class;
                 }
             }
@@ -104,8 +94,8 @@ class JTableExamples{
 
         final int[] row = new int[1];
         final int[] column = new int[1];
-        final String[] commandString = new String[1];
-        final Process[] process = new Process[1];
+        //final String[] commandString = new String[1];
+        //final Process[] process = new Process[1];
 
         //sadece tabloyu dinleyen click listener metodu
         j.addMouseListener(new MouseAdapter() {
@@ -206,21 +196,21 @@ class JTableExamples{
         String[][] result =new String[patient.size()][16];
 
         for (int i=0;i<patient.size();i++) {
-            result[i][0] = dataList.get(patient.get(i)).SpecificCharacterSetV2.toString();
-            result[i][1] = dataList.get(patient.get(i)).StudyDateV2.toString();
-            result[i][2] = dataList.get(patient.get(i)).AccessionNumberV2.toString();
-            result[i][3] = dataList.get(patient.get(i)).RetrieveAETitleV2.toString();
-            result[i][4] = dataList.get(patient.get(i)).InstanceAvailabilityV2.toString();
-            result[i][5] = dataList.get(patient.get(i)).ModalitiesInStudyV2.toString();
-            result[i][6] = dataList.get(patient.get(i)).ReferringPhysiciansNameV2.toString();
-            result[i][7] = dataList.get(patient.get(i)).RetrieveURLV2.toString();
-            result[i][8] = dataList.get(patient.get(i)).PatientsNameV2.toString();
-            result[i][9] = dataList.get(patient.get(i)).PatientsIDV2.toString();
-            result[i][10] = dataList.get(patient.get(i)).PatientsBirthDateV2.toString();
-            result[i][11] = dataList.get(patient.get(i)).PatientsSexV2.toString();
-            result[i][12] = dataList.get(patient.get(i)).StudyInstanceUIDV2.toString();
-            result[i][13] = dataList.get(patient.get(i)).StudyIDV2.toString();
-            result[i][14] = dataList.get(patient.get(i)).NumberofStudyRelatedSeriesV2.toString();
+            result[i][0] = dataList.get(patient.get(i)).SpecificCharacterSetV2;
+            result[i][1] = dataList.get(patient.get(i)).StudyDateV2;
+            result[i][2] = dataList.get(patient.get(i)).AccessionNumberV2;
+            result[i][3] = dataList.get(patient.get(i)).RetrieveAETitleV2;
+            result[i][4] = dataList.get(patient.get(i)).InstanceAvailabilityV2;
+            result[i][5] = dataList.get(patient.get(i)).ModalitiesInStudyV2;
+            result[i][6] = dataList.get(patient.get(i)).ReferringPhysiciansNameV2;
+            result[i][7] = dataList.get(patient.get(i)).RetrieveURLV2;
+            result[i][8] = dataList.get(patient.get(i)).PatientsNameV2;
+            result[i][9] = dataList.get(patient.get(i)).PatientsIDV2;
+            result[i][10] = dataList.get(patient.get(i)).PatientsBirthDateV2;
+            result[i][11] = dataList.get(patient.get(i)).PatientsSexV2;
+            result[i][12] = dataList.get(patient.get(i)).StudyInstanceUIDV2;
+            result[i][13] = dataList.get(patient.get(i)).StudyIDV2;
+            result[i][14] = dataList.get(patient.get(i)).NumberofStudyRelatedSeriesV2;
         }
 
         //jtable sinifinin icine kullanilacak parametreleri gonderiyoruz asagidaki metot baslayinca jframe cizimi basliyor
