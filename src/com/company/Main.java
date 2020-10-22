@@ -30,28 +30,25 @@ import java.io.*;
 
 class JTableExamples{
 
-    // frame
     JFrame f;
 
-    // Table
-    //JTable j;
-
-    // Constructor
+    //Jtable constructor
     JTableExamples(String[][] obj,String urlArgs, String argIP, String argPort) throws IOException {
-
+        //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
-        //BufferedImage img = ImageIO.read(new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies/2.16.840.114421.80563.9652876562/thumbnail"));
-        //BufferedImage img = ImageIO.read(new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.2.792.20200921.142456.6.290.70.2.3947/thumbnail"));
-        //ImageIcon[] myIcon = new ImageIcon[data.length];
+
         for (int i=0;i<obj.length;i++) {
+            //obj nin 12. elemani study instance uid
             String s = obj[i][12].toString();
-            //BufferedImage img = ImageIO.read(new URL(CreateURL(s)));
+            //study instance uidye gore thumbnail goruntulerini veren linki olusturmak icin createurl metonuda gonderiyoruz
             URL url = new URL(CreateURL(s,urlArgs));
+            //gelen url e get metoduyla baglanip gorseli okuyup bufferlıyoruz
             HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
             urlConnect.setRequestMethod("GET");
             urlConnect.setDoOutput(true);
             urlConnect.setReadTimeout(5000);
-            /*
+
+            /*burasi daha hizli bir serverda kullanilabilir
             try(InputStream inputStream = urlConnect.getInputStream()) {
 
                 BufferedImage img = ImageIO.read(urlConnect.getInputStream());
@@ -63,6 +60,8 @@ class JTableExamples{
             }
              */
 
+            //TODO try catch blogu eklenecek image io icin
+            //
             while (urlConnect.getResponseCode() != HttpURLConnection.HTTP_INTERNAL_ERROR) {
                 BufferedImage img = ImageIO.read(urlConnect.getInputStream());
                 if(img != null){
@@ -71,52 +70,18 @@ class JTableExamples{
                 }
                 break;
             }
-
-            /*
-            BufferedImage img;
-            while (equals(img = ImageIO.read(url.openStream()))) {
-                img = ImageIO.read(url.openStream());
-                ImageIcon icon = new ImageIcon(resize(img));
-                data[i][0] = icon;
-            }
-
-             */
-            //java.net.URL imgUrl = getClass().getResource(CreateURL(s));
-            //ImageIcon icon = new ImageIcon(imgUrl);
-            //myIcon[i] = icon;
-
+            //modalite turunu ve study id yi aliyoruz yazdirmak icin
+            //TODO sadece 3 bilgi degil tum bilgiler alinip jtableda gosterilecek
+            //TODO jtable kapatilabilen sutunlar yapilacak(mumkun olmayabilir)
             data[i][1] = obj[i][5];
             data[i][2] = obj[i][12];
             //data[i][3] = obj[i][];
         }
 
-        //BufferedImage img = ImageIO.read(new URL("http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE_ADMIN/wado?requestType=WADO&studyUID=1.2.840.20200203.112320.022.0.192168.1282.3088"));
-
-        // Frame initiallization
         f = new JFrame();
-
-        // Frame Title
         f.setTitle("JTable Example");
-
-        //add thumbnails
-//        Icon icon1 = new ImageIcon("th1.png");
-//        Icon icon2 = new ImageIcon("th2.png");
-//        Icon icon3 = new ImageIcon("th3.png");
-
-        // Data to be displayed in the JTable
-//        Object[][] data = {
-//                { "icon1", "4031", "CSE" },
-//                { "icon2", "6014", "IT" }
-//        };
-
-        // Column Names
+        //TODO sutun isimleri duzenlenecek
         String[] columnNames = { "Thumbnail", "Modality", "Date" };
-
-        // Initializing the JTable
-        //j = new JTable(data, columnNames);
-        //j.setBounds(30, 40, 200, 300);
-        //j.setRowHeight(100);
-        //j.setValueAt(renderer(new ImageIcon(resize(img))),0,0);
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public Class<?> getColumnClass(int column) {
@@ -132,22 +97,16 @@ class JTableExamples{
         JTable j = new JTable(model);
         j.setDefaultEditor(Object.class, null);
         j.setRowHeight(100);
-
-        //j.getColumn("Thumbnail").setCellRenderer(new renderer(new ImageIcon(resize(img))));
-
-
-        // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
         f.add(sp);
-        // Frame Size
         f.setSize(1000, 500);
-        // Frame Visible = true
         f.setVisible(true);
 
         final int[] row = new int[1];
         final int[] column = new int[1];
         final String[] commandString = new String[1];
         final Process[] process = new Process[1];
+
         //sadece tabloyu dinleyen click listener metodu
         j.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
@@ -166,31 +125,27 @@ class JTableExamples{
                 }
 
                 if (me.getClickCount() == 1) {     // to detect doble click events
+
                     row[0] = j.getSelectedRow(); // select a row
                     column[0] = j.getSelectedColumn(); // select a column
-                    //JOptionPane.showMessageDialog(null, j.getValueAt(row[0], 2)); // get the value of a row and column.
-                    //commandString[0] = "$dicom:get -w \"http://localhost:8080/weasis-pacs-connector/manifest?studyUID=" + j.getValueAt(row[0], 2) +"\"";
-                    //commandString[0] = "dicom:get -r \"http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE/wado?requestType=WADO&studyUID=" + j.getValueAt(row[0], 2) +"&contentType=application/dicom&transferSyntax=*\"";
-                    System.out.println(commandString[0]);
+
                     String id = j.getValueAt(row[0], 2).toString();
+                    //getscu icin parametre dizisi olusturuluyor
+                    //TODO getscu kalkacak onun yerine pacs connector stringlerine gore calisan metot gelecek
                     String[] command3 = new String[6];
                     command3[0] = "-c";
                     String link = "DCM4CHEE@" + argIP + ":" + argPort ;
                     command3[1] = link ;
-                    //command3[1] = "DCM4CHEE@192.168.12.132:11112" ;
                     command3[2] = "-m";
                     command3[3] = "StudyInstanceUID="+id;
                     command3[4] = "--directory";
                     command3[5] = "C:\\PacsAssist";
                     GetSCU.main(command3);
+
                     //auto open for directory
                     //goruntuAc(commandString);
                     try {
-                        //Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", commandString[0]).start();
-                        //Process process = new ProcessBuilder("viewer-win32.exe", "$dicom:get -l \"C:/PacsAssist\"").start();
                         Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$dicom:get -l \"C:/PacsAssist\"").start();
-                        //Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe" , "$dicom:get -w \"http://192.168.12.132:8080/weasis-pacs-connector/manifest?studyUID=1.2.840.20200203.112320.022.0.192168.1282.3088\"").start();
-                        //f.dispose();
                         //System.exit(0);
 
                     } catch (IOException ioException) {
@@ -203,12 +158,8 @@ class JTableExamples{
         });
 
     }
-    public void goruntuAc(String[] s){
-
-    }
 
     public String CreateURL(String s, String url) throws MalformedURLException {
-
 
         String h = "wado?requestType=WADO&studyUID=";
         String u = url+ h + s;
@@ -217,49 +168,41 @@ class JTableExamples{
     }
 
     public static void main(String[] args) throws IOException {
-        //TODO args parse**
+        //TODO kisillestirme icin belirli parametreler gelecek mesele pencere kapansin yada ekrani kaplasin vs gibi
+        /*program buradan basliyor once gelen arg dizisi parse ediliyor
+                orn arg; "15736993946" "http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/" "192.168.12.44" "11112"
+                yukarida yer alan args dizisi .bat dosyasinda da mevcut
+         */
         String patientId = args[0];
         String url = args[1];
         String argIP = args[2];
         String argPort = args[3];
 
+
         StudyQuery query = new StudyQuery();
         QueryProcess response = new QueryProcess();
         StudyData studyData = new StudyData();
         ArrayList<StudyData> dataList;
-        //ArrayList<StudyData> dataList2 = new ArrayList<>();
         List<Integer> patient = new ArrayList<Integer>();
-        //query.MwlQuery(response.QueryProcessMethod().toString());
+        //patient id ye gore query olusturup gelen json datasini parse ediyoruz ve study data tipindeki arraylistimize aliyoruz
         dataList=query.StudyQueryParse(response.QueryProcessMethod(url,patientId).toString());
 
 
 
-        for (int i = 0 ; i<dataList.size();i++) {
-            //185174 *******  186062 ******* 27217  *******   242157  ******* 26   *******   223492   **********
-            if( dataList.get(i).PatientsIDV2.equals(patientId) ){
+        /*patient id ornekleri
+            185174 *******  186062 ******* 27217  *******   242157  ******* 26   *******   223492   **********
+        */
 
+        for (int i = 0 ; i<dataList.size();i++) {
+            if( dataList.get(i).PatientsIDV2.equals(patientId) ){
+                //kisinin tum bilgilerini daha rahat kullanmak icin list yapisina aliyoruz
+                //TODO bu list yapisi ortadan kaldirilacak fazlalik asagidaki kod blogu direkt datalist size uzaerinden islem gorebilir
                 patient.add(i);
-//                System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-//                System.out.println(dataList.get(i).SpecificCharacterSetV2);
-//                System.out.println(dataList.get(i).StudyDateV2);
-//                System.out.println(dataList.get(i).AccessionNumberV2);
-//                System.out.println(dataList.get(i).RetrieveAETitleV2);
-//                System.out.println(dataList.get(i).InstanceAvailabilityV2);
-//                System.out.println(dataList.get(i).ModalitiesInStudyV2);
-//                System.out.println(dataList.get(i).ReferringPhysiciansNameV2);
-//                System.out.println(dataList.get(i).RetrieveURLV2);
-//                System.out.println(dataList.get(i).PatientsNameV2);
-//                System.out.println(dataList.get(i).PatientsIDV2);
-//                System.out.println(dataList.get(i).PatientsBirthDateV2);
-//                System.out.println(dataList.get(i).PatientsSexV2);
-//                System.out.println(dataList.get(i).StudyInstanceUIDV2);
-//                System.out.println(dataList.get(i).StudyIDV2);
-//                System.out.println(dataList.get(i).NumberofStudyRelatedSeriesV2);
-//                System.out.println(dataList.get(i).NumberofStudyRelatedInstancesV2);
-//                System.out.println("*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+
             }
 
         }
+
         String[][] result =new String[patient.size()][16];
 
         for (int i=0;i<patient.size();i++) {
@@ -278,20 +221,20 @@ class JTableExamples{
             result[i][12] = dataList.get(patient.get(i)).StudyInstanceUIDV2.toString();
             result[i][13] = dataList.get(patient.get(i)).StudyIDV2.toString();
             result[i][14] = dataList.get(patient.get(i)).NumberofStudyRelatedSeriesV2.toString();
-            //result[i][15] = dataList.get(patient.get(i)).NumberofStudyRelatedInstancesV2.toString();
         }
 
-
+        //jtable sinifinin icine kullanilacak parametreleri gonderiyoruz asagidaki metot baslayinca jframe cizimi basliyor
         new JTableExamples(result,url,argIP,argPort);
+
 
 
 
     }
 
+    //thumbnailin yeniden boyutlandirilmasi
     public static BufferedImage resize(BufferedImage img) {
         Image tmp = img.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
         BufferedImage dimg = new BufferedImage(200, 100, BufferedImage.TYPE_INT_ARGB);
-
         Graphics2D g2d = dimg.createGraphics();
         g2d.drawImage(tmp, 0, 0, null);
         g2d.dispose();
@@ -300,10 +243,10 @@ class JTableExamples{
     }
 }
 
-class renderer extends DefaultTableCellRenderer {
+    //renderer classsi icon tipinde aldigi parametreyi render ederek jtable da kullanima hazir hale getiriyor
+    class renderer extends DefaultTableCellRenderer {
 
-    public renderer(Icon getIcon) {
-        // TODO Auto-generated constructor stub
+        public renderer(Icon getIcon) {
 
         icon = getIcon;
 
