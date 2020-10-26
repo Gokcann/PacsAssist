@@ -5,7 +5,7 @@
  */
 package com.company;
 
-import static com.company.JTableExamples.resize;
+//import static com.company.JTableExamples.resize;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -47,7 +47,6 @@ import javax.swing.RowFilter.ComparisonType;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import org.dcm4che3.tool.getscu.GetSCU;
 
 /**
  *
@@ -55,13 +54,72 @@ import org.dcm4che3.tool.getscu.GetSCU;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    List selected = new ArrayList();
+    public static List selected = new ArrayList();
+    public static String argPort;
+    public static String argIP;
+    public static String url;
+    public static String patientId;
+    UrlCreator urlCreator = new UrlCreator();
+    StudyOpen studyOpen = new StudyOpen();
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
     }
+
+     public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
+
+        private static final long serialVersionUID = 1L;
+        private JCheckBox checkBox;
+
+        private int row;
+        private int column;
+
+
+        public CheckBoxEditor(JCheckBox checkBox) {
+            super(checkBox);
+            this.checkBox = checkBox;
+            this.checkBox.addItemListener(this);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+            this.row = row;
+            this.column = column;
+            checkBox.setSelected((Boolean) value);
+            return super.getTableCellEditorComponent(table, value, isSelected, row, column);
+            //checkBox.setSize(10,10);
+            //return checkBox;
+        }
+
+        //final int[] rows = new int[1];
+        public void itemStateChanged(ItemEvent e) {
+            this.fireEditingStopped();
+                //rows[0] = jTable1.getSelectedRow(); // select a row
+                String id = jTable1.getValueAt(row, 4).toString();
+            System.out.println("Item Changed " + row + " value is: " + checkBox.isSelected());
+
+            if( checkBox.isSelected() && (selected.indexOf(id) ==-1) ) {
+
+                selected.add(id);
+                for (int i =0;i<selected.size();i++) {
+                    System.out.println("Selected:" + selected.get(i));
+                }
+            }
+            if(!checkBox.isSelected()) {
+                selected.remove(selected.indexOf(id));
+                for (int i =0;i<selected.size();i++) {
+                    System.out.println("Selected:" + selected.get(i));
+                }
+            }
+            System.out.println("//////////////////"+selected.size());
+
+        }
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -341,6 +399,7 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         sorter.setRowFilter(compoundRowFilter);
+        
 
     }//GEN-LAST:event_jBugunButtonActionPerformed
 
@@ -490,14 +549,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if( selected.size() > 0 ) {
+            studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
+        }
+        System.out.println("*************");
+        System.out.println(selected.size());
+                    
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    MainFrame(String[][] obj,String urlArgs, String argIP, String argPort) throws IOException {
+        MainFrame(String[][] obj,String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
-        StudyOpen studyOpen = new StudyOpen();
-        UrlCreator urlCreator = new UrlCreator();
+
+
         GetThumb getThumb = new GetThumb();
 
         for (int i = 0; i < obj.length; i++) {
@@ -514,13 +578,15 @@ public class MainFrame extends javax.swing.JFrame {
             jPatientName.setText(obj[i][8]);
             jPatientID.setText(obj[i][9]);
             String birthdate = obj[i][10].toString();
-            if (birthdate.length() != 0) {
+/*
+            if (!(birthdate.length().equals(""))) {
 
                 String yyyy = birthdate.substring(0, 4);
                 String MM = birthdate.substring(4, 6);
                 String dd = birthdate.substring(6, 8);
                 jPatientBirthDate.setText(dd + "-" + MM + "-" + yyyy);
             }
+*/
             jPatientSex.setText(obj[i][11]);
             String a = obj[i][1].toString();
             if (a.length() != 0) {
@@ -561,7 +627,7 @@ public class MainFrame extends javax.swing.JFrame {
         };
 
         jTable1.setModel(model);
-        jTable1.getColumnModel().getColumn(3).setCellEditor(new CheckBoxEditor(new JCheckBox()));
+        jTable1.getColumnModel().getColumn(6).setCellEditor(new CheckBoxEditor(new JCheckBox()));
         jTable1.setDefaultEditor(Object.class, null);
         jTable1.setRowHeight(100);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -597,10 +663,11 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {     // to detect doble click events
-
+/*
                     row[0] = jTable1.getSelectedRow(); // select a row
                     String id = jTable1.getValueAt(row[0], 4).toString();
                     studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, id));
+*/
                 }
             }
         });
@@ -618,16 +685,17 @@ public class MainFrame extends javax.swing.JFrame {
                 orn arg; "15736993946" "http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/" "192.168.12.44" "11112"
                 yukarida yer alan args dizisi .bat dosyasinda da mevcut
          */
-        String patientId = args[0];
-        String url = args[1];
-        String argIP = args[2];
-        String argPort = args[3];
+        patientId = args[0];
+        url = args[1];
+        argIP = args[2];
+        argPort = args[3];
 
         StudyQuery query = new StudyQuery();
         QueryProcess response = new QueryProcess();
         StudyData studyData = new StudyData();
         ArrayList<StudyData> dataList;
         List<Integer> patient = new ArrayList<Integer>();
+        UrlCreator creator = new UrlCreator();
         //patient id ye gore query olusturup gelen json datasini parse ediyoruz ve study data tipindeki arraylistimize aliyoruz
         dataList=query.StudyQueryParse(response.QueryProcessMethod(url,patientId).toString());
         String[][] result =new String[dataList.size()][16];
@@ -685,85 +753,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
     
-     public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
-
-        private static final long serialVersionUID = 1L;
-        private JCheckBox checkBox;
-
-        private int row;
-        private int column;
 
 
-        public CheckBoxEditor(JCheckBox checkBox) {
-            super(checkBox);
-            this.checkBox = checkBox;
-            this.checkBox.addItemListener(this);
-        }
 
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                                                     boolean isSelected, int row, int column) {
-            this.row = row;
-            this.column = column;
-            checkBox.setSelected((Boolean) value);
-            return super.getTableCellEditorComponent(table, value, isSelected, row, column);
-            //checkBox.setSize(10,10);
-            //return checkBox;
-        }
 
-        public void itemStateChanged(ItemEvent e) {
-            this.fireEditingStopped();
-            System.out.println("Item Changed " + row + " value is: " + checkBox.isSelected());
-            if( checkBox.isSelected() && (selected.indexOf(row) ==-1) ) {
-                selected.add(row);
-                for (int i =0;i<selected.size();i++) {
-                    System.out.println("Selected:" + selected.get(i));
-                }
-            }
-            if(!checkBox.isSelected()) {
-                selected.remove(selected.indexOf(row));
-                for (int i =0;i<selected.size();i++) {
-                    System.out.println("Selected:" + selected.get(i));
-                }
-            }
-        }
-
-    }
-
-    //thumbnailin yeniden boyutlandirilmasi
-    public static BufferedImage resize(BufferedImage img) {
-        Dimension boundary = new Dimension(200, 100);
-        int original_width = img.getWidth();
-        int original_height = img.getHeight();
-        int bound_width = boundary.width;
-        int bound_height = boundary.height;
-        int new_width = original_width;
-        int new_height = original_height;
-
-        // first check if we need to scale width
-        if (original_width > bound_width) {
-            //scale width to fit
-            new_width = bound_width;
-            //scale height to maintain aspect ratio
-            new_height = (new_width * original_height) / original_width;
-        }
-
-        // then check if we need to scale even with the new height
-        if (new_height > bound_height) {
-            //scale height to fit instead
-            new_height = bound_height;
-            //scale width to maintain aspect ratio
-            new_width = (new_height * original_width) / original_height;
-        }
-
-        Image tmp = img.getScaledInstance(new_width, new_height, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage(200, 100, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-
-        return dimg;
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

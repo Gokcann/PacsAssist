@@ -1,5 +1,6 @@
 package com.company;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.HttpURLConnection;
-
+/*
 class JTableExamples{
 
     JFrame f;
@@ -74,7 +75,7 @@ class JTableExamples{
 
                     row[0] = j.getSelectedRow(); // select a row
                     String id = j.getValueAt(row[0], 2).toString();
-                    studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP,argPort,id));
+                    //studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP,argPort,id));
 
                 }
 
@@ -84,6 +85,8 @@ class JTableExamples{
 
 
     }
+*/
+/*
 
     public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
 
@@ -130,13 +133,15 @@ class JTableExamples{
 
     }
 
+*/
 
-    public static void main(String[] args) throws IOException {
+  //  public static void main(String[] args) throws IOException {
         //TODO kisillestirme icin belirli parametreler gelecek mesela pencere kapansin yada ekrani kaplasin vs gibi
         /*program buradan basliyor once gelen arg dizisi parse ediliyor
                 orn arg; "15736993946" "http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/" "192.168.12.44" "11112"
                 yukarida yer alan args dizisi .bat dosyasinda da mevcut
          */
+/*
         String patientId = args[0];
         String url = args[1];
         String argIP = args[2];
@@ -182,7 +187,7 @@ class JTableExamples{
     }
 
 }
-
+*/
 
 
 /*

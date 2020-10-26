@@ -89,7 +89,7 @@ public class StudyQuery {
                         .getJSONArray(_tmp.getPatientsIDT2()).getString(0));
             }
            
-            if (myArray.getJSONObject(i).getJSONObject(_tmp.getPatientsBirthDateT0()).has(_tmp.getPatientsBirthDateT2())) {
+            if (myArray.getJSONObject(i).getJSONObject(_tmp.getPatientsBirthDateT0()).has(_tmp.getPatientsBirthDateT2()) ) {
                 tmp.setPatientsBirthDateV2(obj.getJSONObject(_tmp.getPatientsBirthDateT0())
                         .getJSONArray(_tmp.getPatientsBirthDateT2()).getString(0));
             }
