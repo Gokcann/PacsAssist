@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -153,6 +154,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PacsAssist");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("src\\com\\company\\Logo.png"));
         setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -160,7 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Thumbnail", "Modality", "Study Date", "Yonlendiren", "Study Instance UID", "tik"
+                "Thumbnail", "Modality", "Study Date", "Yönlendiren", "Study Instance UID", "Seçilen"
             }
         ) {
             Class[] types = new Class [] {
@@ -179,15 +181,16 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
-        jLabel1.setText("Hasta Adi Soyadi");
+        jLabel1.setText("Hasta Adı Soyadı");
 
-        jLabel2.setText("Hasta TC No");
+        jLabel2.setText("Hasta TC Numarası");
 
-        jLabel3.setText("Hasta Dogum Tarihi");
+        jLabel3.setText("Hasta Doğum Tarihi");
 
         jLabel4.setText("Hasta Cinsiyet");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC", "CR", "KO" }));
+        jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -196,7 +199,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Modality Filtresi");
 
-        jBugunButton.setText("Bugun");
+        jBugunButton.setText("Bugün");
         jBugunButton.setMaximumSize(new java.awt.Dimension(75, 23));
         jBugunButton.setMinimumSize(new java.awt.Dimension(75, 23));
         jBugunButton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,14 +238,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButunButton.setText("Butun Tarihler");
+        jButunButton.setText("Bütün Tarihler");
         jButunButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButunButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Goster");
+        jButton1.setText("Göster");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -611,7 +614,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         //TODO sutun isimleri duzenlenecek
-        String[] columnNames = {"Thumbnail", "Modality", "Study Date", "Yonlendiren", "Study Instance UID", "boş tarih", "tik"};
+        String[] columnNames = {"Thumbnail", "Modality", "Study Date", "Yonlendiren", "Study Instance UID", "boş tarih", "Seçilen"};
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public Class<?> getColumnClass(int column) {
@@ -627,6 +630,7 @@ public class MainFrame extends javax.swing.JFrame {
         };
 
         jTable1.setModel(model);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.getColumnModel().getColumn(6).setCellEditor(new CheckBoxEditor(new JCheckBox()));
         jTable1.setDefaultEditor(Object.class, null);
         jTable1.setRowHeight(100);
@@ -724,10 +728,24 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
         }
+        /*  UIManager.put("control", new Color(128, 128, 128));
+        UIManager.put("info", new Color(128, 128, 128));
+        UIManager.put("nimbusBase", new Color(18, 30, 49));
+        UIManager.put("nimbusAlertYellow", new Color(248, 187, 0));
+        UIManager.put("nimbusDisabledText", new Color(128, 128, 128));
+        UIManager.put("nimbusFocus", new Color(115, 164, 209));
+        UIManager.put("nimbusGreen", new Color(176, 179, 50));
+        UIManager.put("nimbusInfoBlue", new Color(66, 139, 221));
+        UIManager.put("nimbusLightBackground", new Color(18, 30, 49));
+        UIManager.put("nimbusOrange", new Color(191, 98, 4));
+        UIManager.put("nimbusRed", new Color(169, 46, 34));
+        UIManager.put("nimbusSelectedText", new Color(255, 255, 255));
+        UIManager.put("nimbusSelectionBackground", new Color(104, 93, 156));
+        UIManager.put("text", new Color(230, 230, 230)); */
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
