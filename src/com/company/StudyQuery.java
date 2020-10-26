@@ -1,9 +1,8 @@
 package com.company;
 
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class StudyQuery {
 
@@ -17,9 +16,6 @@ public class StudyQuery {
 
         StudyData[] data = new StudyData[myArray.length()];
         return "";
-
-
-
 
     }
 
@@ -52,10 +48,8 @@ public class StudyQuery {
                         .getString(_tmp.getReferringPhysiciansNameT3()));
             }
 
-
             //iki asamali
             //myArray.getJSONObject(i).getJSONObject(_tmp.getReferringPhysiciansNameT0()).getJSONArray(_tmp.getReferringPhysiciansNameT2()).getJSONObject(0).has(_tmp.getReferringPhysiciansNameT3())
-
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getRetrieveAETitleT0()).has(_tmp.getRetrieveAETitleT2())) {
                 tmp.setRetrieveAETitleV2(obj.getJSONObject(_tmp.getRetrieveAETitleT0())
                         .getJSONArray(_tmp.getRetrieveAETitleT2()).getString(0));
@@ -70,14 +64,14 @@ public class StudyQuery {
                 tmp.setModalitiesInStudyV2(obj.getJSONObject(_tmp.getModalitiesInStudyT0())
                         .getJSONArray(_tmp.getModalitiesInStudyT2()).getString(0));
             }
-/*
+            /*
             if (myArray.getJSONObject(i).has(_tmp.getReferringPhysiciansNameT0()) && myArray.getJSONObject(i).getJSONObject(_tmp.getReferringPhysiciansNameT0()).getJSONArray(_tmp.getReferringPhysiciansNameT2()).getJSONObject(0).has(_tmp.getReferringPhysiciansNameT3())) {
                 tmp.setReferringPhysiciansNameV2(obj.getJSONObject(_tmp.getReferringPhysiciansNameT0())
                         .getJSONArray(_tmp.getReferringPhysiciansNameT2()).getJSONObject(0)
                         .getString(_tmp.getReferringPhysiciansNameT3()));
             }
 
- */
+             */
 
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getRetrieveURLT0()).has(_tmp.getRetrieveURLT2())) {
                 tmp.setRetrieveURLV2(obj.getJSONObject(_tmp.getRetrieveURLT0())
@@ -94,13 +88,11 @@ public class StudyQuery {
                 tmp.setPatientsIDV2(obj.getJSONObject(_tmp.getPatientsIDT0())
                         .getJSONArray(_tmp.getPatientsIDT2()).getString(0));
             }
-/*
+           
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getPatientsBirthDateT0()).has(_tmp.getPatientsBirthDateT2())) {
                 tmp.setPatientsBirthDateV2(obj.getJSONObject(_tmp.getPatientsBirthDateT0())
                         .getJSONArray(_tmp.getPatientsBirthDateT2()).getString(0));
             }
-
- */
 
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getPatientsSexT0()).has(_tmp.getPatientsSexT2())) {
                 tmp.setPatientsSexV2(obj.getJSONObject(_tmp.getPatientsSexT0())
@@ -111,33 +103,27 @@ public class StudyQuery {
                 tmp.setStudyInstanceUIDV2(obj.getJSONObject(_tmp.getStudyInstanceUIDT0())
                         .getJSONArray(_tmp.getStudyInstanceUIDT2()).getString(0));
             }
-/*
+            /*
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getStudyIDT0()).has(_tmp.getStudyIDT2())) {
                 tmp.setStudyIDV2(obj.getJSONObject(_tmp.getStudyIDT0())
                         .getJSONArray(_tmp.getStudyIDT2()).getString(0));
             }
 
- */
+             */
 
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getNumberofStudyRelatedSeriesT0()).has(_tmp.getNumberofStudyRelatedSeriesT2())) {
                 tmp.setNumberofStudyRelatedSeriesV2(obj.getJSONObject(_tmp.getNumberofStudyRelatedSeriesT0())
                         .getJSONArray(_tmp.getNumberofStudyRelatedSeriesT2()).toString());
             }
 
-
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getNumberofStudyRelatedInstancesT0()).has(_tmp.getNumberofStudyRelatedInstancesT2())) {
                 tmp.setNumberofStudyRelatedInstancesV2(obj.getJSONObject(_tmp.getNumberofStudyRelatedInstancesT0())
                         .getJSONArray(_tmp.getNumberofStudyRelatedInstancesT2()).toString());
             }
 
-
-
             list.add(tmp);
 
             //TODO add other if &and& controls
-
-
-
         }
 
         return list;

@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.company;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,7 +17,7 @@ import java.net.URL;
 
 public class GetThumb {
 
-    public ImageIcon GetThumbnail(String[][] data, Integer index, String urlArgs, String argIP, String argPort) throws IOException {
+    public static ImageIcon GetThumbnail(String[][] data, Integer index, String urlArgs, String argIP, String argPort) throws IOException {
 
         UrlCreator urlCreator = new UrlCreator();
         ImageIcon icon = null;
