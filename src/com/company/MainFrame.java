@@ -62,6 +62,8 @@ public class MainFrame extends javax.swing.JFrame {
     public static String patientId;
     UrlCreator urlCreator = new UrlCreator();
     StudyOpen studyOpen = new StudyOpen();
+    URL url3 = MainFrame.class.getResource("/Logo.png");
+
     /**
      * Creates new form MainFrame
      */
@@ -69,14 +71,13 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-     public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
+    public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
 
         private static final long serialVersionUID = 1L;
         private JCheckBox checkBox;
 
         private int row;
         private int column;
-
 
         public CheckBoxEditor(JCheckBox checkBox) {
             super(checkBox);
@@ -86,7 +87,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
-                                                     boolean isSelected, int row, int column) {
+                boolean isSelected, int row, int column) {
             this.row = row;
             this.column = column;
             checkBox.setSelected((Boolean) value);
@@ -98,29 +99,28 @@ public class MainFrame extends javax.swing.JFrame {
         //final int[] rows = new int[1];
         public void itemStateChanged(ItemEvent e) {
             this.fireEditingStopped();
-                //rows[0] = jTable1.getSelectedRow(); // select a row
-                String id = jTable1.getValueAt(row, 4).toString();
+            //rows[0] = jTable1.getSelectedRow(); // select a row
+            String id = jTable1.getValueAt(row, 4).toString();
             System.out.println("Item Changed " + row + " value is: " + checkBox.isSelected());
 
-            if( checkBox.isSelected() && (selected.indexOf(id) ==-1) ) {
+            if (checkBox.isSelected() && (selected.indexOf(id) == -1)) {
 
                 selected.add(id);
-                for (int i =0;i<selected.size();i++) {
+                for (int i = 0; i < selected.size(); i++) {
                     System.out.println("Selected:" + selected.get(i));
                 }
             }
-            if(!checkBox.isSelected()) {
+            if (!checkBox.isSelected()) {
                 selected.remove(selected.indexOf(id));
-                for (int i =0;i<selected.size();i++) {
+                for (int i = 0; i < selected.size(); i++) {
                     System.out.println("Selected:" + selected.get(i));
                 }
             }
-            System.out.println("//////////////////"+selected.size());
+            System.out.println("//////////////////" + selected.size());
 
         }
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,7 +154,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PacsAssist");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("src\\com\\company\\Logo.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(url3));
         setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -402,7 +402,7 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         sorter.setRowFilter(compoundRowFilter);
-        
+
 
     }//GEN-LAST:event_jBugunButtonActionPerformed
 
@@ -547,23 +547,22 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        sorter.setRowFilter(compoundRowFilter);
+        sorter.setRowFilter(compoundRowFilter);        
     }//GEN-LAST:event_jButunButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if( selected.size() > 0 ) {
+        if (selected.size() > 0) {
             studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
         }
         System.out.println("*************");
         System.out.println(selected.size());
-                    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-        MainFrame(String[][] obj,String urlArgs, String argIP, String argPort) throws IOException {
+    MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
-
 
         GetThumb getThumb = new GetThumb();
 
@@ -581,7 +580,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPatientName.setText(obj[i][8]);
             jPatientID.setText(obj[i][9]);
             String birthdate = obj[i][10].toString();
-/*
+            /*
             if (!(birthdate.length().equals(""))) {
 
                 String yyyy = birthdate.substring(0, 4);
@@ -589,7 +588,7 @@ public class MainFrame extends javax.swing.JFrame {
                 String dd = birthdate.substring(6, 8);
                 jPatientBirthDate.setText(dd + "-" + MM + "-" + yyyy);
             }
-*/
+             */
             jPatientSex.setText(obj[i][11]);
             String a = obj[i][1].toString();
             if (a.length() != 0) {
@@ -671,7 +670,7 @@ public class MainFrame extends javax.swing.JFrame {
                     row[0] = jTable1.getSelectedRow(); // select a row
                     String id = jTable1.getValueAt(row[0], 4).toString();
                     studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, id));
-*/
+                     */
                 }
             }
         });
@@ -680,10 +679,8 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
-
     public static void main(String args[]) throws IOException {
-        
+
         //TODO kisillestirme icin belirli parametreler gelecek mesela pencere kapansin yada ekrani kaplasin vs gibi
         /*program buradan basliyor once gelen arg dizisi parse ediliyor
                 orn arg; "15736993946" "http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/" "192.168.12.44" "11112"
@@ -701,12 +698,12 @@ public class MainFrame extends javax.swing.JFrame {
         List<Integer> patient = new ArrayList<Integer>();
         UrlCreator creator = new UrlCreator();
         //patient id ye gore query olusturup gelen json datasini parse ediyoruz ve study data tipindeki arraylistimize aliyoruz
-        dataList=query.StudyQueryParse(response.QueryProcessMethod(url,patientId).toString());
-        String[][] result =new String[dataList.size()][16];
+        dataList = query.StudyQueryParse(response.QueryProcessMethod(url, patientId).toString());
+        String[][] result = new String[dataList.size()][16];
 
-        for (int i = 0 ; i<dataList.size();i++)  {
+        for (int i = 0; i < dataList.size(); i++) {
             //bu if blogunun gerekliligi tartismaya acik
-            if( dataList.get(i).PatientsIDV2.equals(patientId) ){
+            if (dataList.get(i).PatientsIDV2.equals(patientId)) {
 
                 //kisinin tum bilgilerini daha rahat kullanmak icin list yapisina aliyoruz
                 result[i][0] = dataList.get(i).SpecificCharacterSetV2;
@@ -742,7 +739,7 @@ public class MainFrame extends javax.swing.JFrame {
         UIManager.put("nimbusSelectedText", new Color(255, 255, 255));
         UIManager.put("nimbusSelectionBackground", new Color(104, 93, 156));
         UIManager.put("text", new Color(230, 230, 230)); */
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -759,22 +756,17 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
             }
         });
-        
-        new MainFrame(result,url,argIP,argPort);
+
+        new MainFrame(result, url, argIP, argPort);
 
     }
-    
-
-
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
