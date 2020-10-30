@@ -65,7 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
     public static String patientId;
     UrlCreator urlCreator = new UrlCreator();
     StudyOpen studyOpen = new StudyOpen();
-    URL url3 = MainFrame.class.getResource("/Logo.png");      
+    URL url3 = MainFrame.class.getResource("/Logo.png");
 
     /**
      * Creates new form MainFrame
@@ -252,7 +252,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajax-loader.gif"))); // NOI18N
 
-        Yenile.setText("Yenile");
+        Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
         Yenile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YenileActionPerformed(evt);
@@ -265,13 +265,11 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Yenile)
-                        .addGap(45, 45, 45)))
+                        .addContainerGap()
+                        .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,13 +297,6 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Yenile)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBugunButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +308,15 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jAltiAyButton)
-                            .addComponent(jBirAyButton))))
+                            .addComponent(jBirAyButton)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -588,7 +587,7 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         sorter.setRowFilter(compoundRowFilter);
-        
+
         jTable1.setValueAt(true, 0, 6);
     }//GEN-LAST:event_jButunButtonActionPerformed
 
@@ -603,7 +602,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void YenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YenileActionPerformed
-                String[][] result3 = null;
+        String[][] result3 = null;
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+        table.setRowCount(0);
+
         try {
             result3 = baslangic();
         } catch (IOException ex) {
@@ -719,7 +721,7 @@ public class MainFrame extends javax.swing.JFrame {
         //jScrollPane1.setOpaque(false);
         //jScrollPane1.getViewport().setOpaque(false);
         jLabel1.setVisible(false);
-        jTable1.setModel(model);        
+        jTable1.setModel(model);
         //jTable1.setShowGrid(false);
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(25, 0));
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -727,7 +729,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1.setDefaultEditor(Object.class, null);
         jTable1.setRowHeight(100);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setMinWidth(0);            
+            jTable1.getColumnModel().getColumn(1).setMinWidth(0);
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
             jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
             jTable1.getColumnModel().getColumn(2).setMinWidth(0);
@@ -768,7 +770,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public static String[][] baslangic() throws IOException {
         StudyQuery query = new StudyQuery();
         QueryProcess response = new QueryProcess();
@@ -804,13 +806,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
         }
-        
+
         return result;
-        
-        
+
     }
-    
-    
 
     /**
      * @param args the command line arguments
@@ -859,7 +858,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -868,8 +867,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-                new MainFrame(baslangic(), url, argIP, argPort);
-
+        new MainFrame(baslangic(), url, argIP, argPort);
 
     }
 
