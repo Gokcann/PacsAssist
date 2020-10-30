@@ -691,6 +691,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(6).setCellEditor(new CheckBoxEditor(new JCheckBox()));
         jTable1.setDefaultEditor(Object.class, null);
         jTable1.setRowHeight(100);
+        //secilen satirin renk degistirmemesi icin
+        jTable1.setSelectionBackground(Color.WHITE);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(1).setMinWidth(0);            
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
