@@ -147,6 +147,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButunButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        Yenile = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPatientName = new javax.swing.JLabel();
         jPatientID = new javax.swing.JLabel();
@@ -251,13 +252,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajax-loader.gif"))); // NOI18N
 
+        Yenile.setText("Yenile");
+        Yenile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YenileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Yenile)
+                        .addGap(45, 45, 45)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +302,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Yenile)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -586,6 +602,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void YenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YenileActionPerformed
+                String[][] result3 = null;
+        try {
+            result3 = baslangic();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            new MainFrame(result3, url, argIP, argPort);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_YenileActionPerformed
+
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
@@ -738,22 +768,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) throws IOException {
-
-        //TODO kisillestirme icin belirli parametreler gelecek mesela pencere kapansin yada ekrani kaplasin vs gibi
-        /*program buradan basliyor once gelen arg dizisi parse ediliyor
-                orn arg; "15736993946" "http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/" "192.168.12.44" "11112"
-                yukarida yer alan args dizisi .bat dosyasinda da mevcut
-         */
-        patientId = args[0];
-        url = args[1];
-        argIP = args[2];
-        argPort = args[3];
-
+    
+    public static String[][] baslangic() throws IOException {
         StudyQuery query = new StudyQuery();
         QueryProcess response = new QueryProcess();
         StudyData studyData = new StudyData();
@@ -788,6 +804,30 @@ public class MainFrame extends javax.swing.JFrame {
             }
 
         }
+        
+        return result;
+        
+        
+    }
+    
+    
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) throws IOException {
+
+        //TODO kisillestirme icin belirli parametreler gelecek mesela pencere kapansin yada ekrani kaplasin vs gibi
+        /*program buradan basliyor once gelen arg dizisi parse ediliyor
+                orn arg; "15736993946" "http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/" "192.168.12.44" "11112"
+                yukarida yer alan args dizisi .bat dosyasinda da mevcut
+         */
+        patientId = args[0];
+        url = args[1];
+        argIP = args[2];
+        argPort = args[3];
+        String[][] result2 = baslangic();
+
         /* UIManager.put("control", new Color(128, 128, 128));
         UIManager.put("info", new Color(128, 128, 128));
         UIManager.put("nimbusBase", new Color(18, 30, 49));
@@ -819,6 +859,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -827,12 +868,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        new MainFrame(result, url, argIP, argPort);
+                new MainFrame(baslangic(), url, argIP, argPort);
+
 
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Yenile;
     private javax.swing.JButton jAltiAyButton;
     private javax.swing.JButton jBirAyButton;
     private javax.swing.JButton jBirYılButton;
