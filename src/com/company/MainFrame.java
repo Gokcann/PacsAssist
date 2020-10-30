@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -145,9 +146,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirAyButton = new javax.swing.JButton();
         jBirYılButton = new javax.swing.JButton();
         jButunButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jWeasisButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Yenile = new javax.swing.JButton();
+        jFiltCheck = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jPatientName = new javax.swing.JLabel();
         jPatientID = new javax.swing.JLabel();
@@ -243,14 +245,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jWeasisButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
+        jWeasisButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jWeasisButtonActionPerformed(evt);
             }
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajax-loader.gif"))); // NOI18N
+        jLabel1.setDisabledIcon(null);
 
         Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
         Yenile.addActionListener(new java.awt.event.ActionListener() {
@@ -259,17 +262,25 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jFiltCheck.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jFiltCheck.setText("Filtreleme");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(197, 197, 197)
+                .addComponent(jFiltCheck)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +297,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                 .addGap(78, 78, 78)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
@@ -295,7 +306,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -316,7 +327,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jFiltCheck))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -371,7 +384,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -391,6 +404,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
+        selected.clear();
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
 
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
@@ -410,29 +424,40 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        sorter.setRowFilter(compoundRowFilter);
-
+        if (jFiltCheck.isSelected()) {
+            sorter.setRowFilter(compoundRowFilter);
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        } else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 1).equals(queryMod + "  -  [1]")) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jBugunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunButtonActionPerformed
+        selected.clear();
+        Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        Date simdikiZaman = new Date();
-        System.out.println(simdikiZaman.toString());
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        System.out.println(df.format(simdikiZaman));
+        cal.add(Calendar.DATE, 0);
+        System.out.println("Today " + dateFormat.format(cal.getTime()));
+
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
         jTable1.setRowSorter(sorter);
-        String queryMod = jComboBox1.getSelectedItem().toString();
-
-        //String queryMod = jComboBox1.getSelectedItem().toString();
         RowFilter<DefaultTableModel, Object> firstFiler = null;
 
         List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
         RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
         try {
-            firstFiler = RowFilter.regexFilter(df.format(simdikiZaman), 2);
+            firstFiler = RowFilter.regexFilter(dateFormat.format(cal.getTime()), 2);
 
             filters.add(firstFiler);
 
@@ -440,12 +465,26 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        sorter.setRowFilter(compoundRowFilter);
 
-
+        if (jFiltCheck.isSelected()) {
+            sorter.setRowFilter(compoundRowFilter);
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        }   else {
+              for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            } 
+        }
     }//GEN-LAST:event_jBugunButtonActionPerformed
 
     private void jAltiAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyButtonActionPerformed
+        selected.clear();
         try {
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             Date now = new Date();
@@ -474,10 +513,15 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            selected.add(jTable1.getValueAt(i, 4).toString());
+            jTable1.setValueAt(true, i, 6);
+        }
     }//GEN-LAST:event_jAltiAyButtonActionPerformed
 
     private void jBirAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyButtonActionPerformed
 
+        selected.clear();
         try {
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             Date now = new Date();
@@ -506,10 +550,15 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            selected.add(jTable1.getValueAt(i, 4).toString());
+            jTable1.setValueAt(true, i, 6);
+        }
     }//GEN-LAST:event_jBirAyButtonActionPerformed
 
     private void jDunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunButtonActionPerformed
         // TODO add your handling code here:
+        selected.clear();
         Calendar cal = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -532,11 +581,26 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        sorter.setRowFilter(compoundRowFilter);
+        if (jFiltCheck.isSelected()) {
+            sorter.setRowFilter(compoundRowFilter);
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        }   else {
+              for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            } 
+        }
     }//GEN-LAST:event_jDunButtonActionPerformed
 
     private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
 
+        selected.clear();
         try {
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
             Date now = new Date();
@@ -565,9 +629,16 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            selected.add(jTable1.getValueAt(i, 4).toString());
+            jTable1.setValueAt(true, i, 6);
+        }
     }//GEN-LAST:event_jBirYılButtonActionPerformed
 
     private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
+
+        selected.clear();
 
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
@@ -588,10 +659,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         sorter.setRowFilter(compoundRowFilter);
 
-        jTable1.setValueAt(true, 0, 6);
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            selected.add(jTable1.getValueAt(i, 4).toString());
+            jTable1.setValueAt(true, i, 6);
+        }
     }//GEN-LAST:event_jButunButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
         // TODO add your handling code here:
         if (selected.size() > 0) {
             studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
@@ -599,13 +673,10 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println("*************");
         System.out.println(selected.size());
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jWeasisButtonActionPerformed
 
     private void YenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YenileActionPerformed
         String[][] result3 = null;
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        table.setRowCount(0);
-
         try {
             result3 = baslangic();
         } catch (IOException ex) {
@@ -720,7 +791,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         //jScrollPane1.setOpaque(false);
         //jScrollPane1.getViewport().setOpaque(false);
-        jLabel1.setVisible(false);
+        jLabel1.setDisabledIcon(new ImageIcon(getClass().getResource("/null.png")));
+        jLabel1.setEnabled(false);
         jTable1.setModel(model);
         //jTable1.setShowGrid(false);
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(25, 0));
@@ -825,6 +897,7 @@ public class MainFrame extends javax.swing.JFrame {
         url = args[1];
         argIP = args[2];
         argPort = args[3];
+
         String[][] result2 = baslangic();
 
         /* UIManager.put("control", new Color(128, 128, 128));
@@ -878,10 +951,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jBirAyButton;
     private javax.swing.JButton jBirYılButton;
     private javax.swing.JButton jBugunButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButunButton;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JButton jDunButton;
+    public static javax.swing.JCheckBox jFiltCheck;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -892,5 +965,6 @@ public class MainFrame extends javax.swing.JFrame {
     public static javax.swing.JLabel jPatientSex;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
+    private javax.swing.JButton jWeasisButton;
     // End of variables declaration//GEN-END:variables
 }
