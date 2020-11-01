@@ -484,6 +484,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jBugunButtonActionPerformed
 
     private void jAltiAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyButtonActionPerformed
+       if(jFiltCheck.isSelected())  {
         selected.clear();
         try {
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
@@ -513,14 +514,31 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             selected.add(jTable1.getValueAt(i, 4).toString());
             jTable1.setValueAt(true, i, 6);
         }
+       }
+       else {
+           for (int k = 0;k < 185; k++) {
+           Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        cal.add(Calendar.DATE, -k);
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+               
+                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+           }
+       }
+       }
     }//GEN-LAST:event_jAltiAyButtonActionPerformed
 
     private void jBirAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyButtonActionPerformed
-
+if(jFiltCheck.isSelected())  {
         selected.clear();
         try {
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
@@ -550,10 +568,27 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             selected.add(jTable1.getValueAt(i, 4).toString());
             jTable1.setValueAt(true, i, 6);
         }
+       }
+       else {
+           for (int k = 0;k < 32; k++) {
+           Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        cal.add(Calendar.DATE, -k);
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+               
+                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+           }
+       }
+       }
     }//GEN-LAST:event_jBirAyButtonActionPerformed
 
     private void jDunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunButtonActionPerformed
@@ -600,6 +635,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
 
+        if(jFiltCheck.isSelected())  {
         selected.clear();
         try {
             SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
@@ -634,6 +670,22 @@ public class MainFrame extends javax.swing.JFrame {
             selected.add(jTable1.getValueAt(i, 4).toString());
             jTable1.setValueAt(true, i, 6);
         }
+       }
+       else {
+           for (int k = 0;k < 366; k++) {
+           Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        cal.add(Calendar.DATE, -k);
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+               
+                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+           }
+       }
+       }
     }//GEN-LAST:event_jBirYılButtonActionPerformed
 
     private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
