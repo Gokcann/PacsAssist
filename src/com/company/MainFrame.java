@@ -141,24 +141,26 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jBugunButton = new javax.swing.JButton();
-        jAltiAyButton = new javax.swing.JButton();
-        jDunButton = new javax.swing.JButton();
-        jBirAyButton = new javax.swing.JButton();
-        jBirYılButton = new javax.swing.JButton();
-        jButunButton = new javax.swing.JButton();
         jWeasisButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        Yenile = new javax.swing.JButton();
-        jFiltCheck = new javax.swing.JCheckBox();
         jWebViewerButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPatientName = new javax.swing.JLabel();
         jPatientID = new javax.swing.JLabel();
         jPatientSex = new javax.swing.JLabel();
         jPatientBirthDate = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        Yenile = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jFiltCheck = new javax.swing.JCheckBox();
+        jBugunButton = new javax.swing.JButton();
+        jDunButton = new javax.swing.JButton();
+        jBirAyButton = new javax.swing.JButton();
+        jAltiAyButton = new javax.swing.JButton();
+        jBirYılButton = new javax.swing.JButton();
+        jButunButton = new javax.swing.JButton();
+        jModalityCombo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PacsAssist");
@@ -192,84 +194,12 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
-        jComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 28)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC", "CR", "KO", "IO" }));
-        jComboBox1.setToolTipText("");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Modality Filtresi");
-
-        jBugunButton.setText("Bugün");
-        jBugunButton.setMaximumSize(new java.awt.Dimension(75, 23));
-        jBugunButton.setMinimumSize(new java.awt.Dimension(75, 23));
-        jBugunButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBugunButtonActionPerformed(evt);
-            }
-        });
-
-        jAltiAyButton.setText("Son 6 Ay");
-        jAltiAyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAltiAyButtonActionPerformed(evt);
-            }
-        });
-
-        jDunButton.setText("Dün");
-        jDunButton.setMaximumSize(new java.awt.Dimension(75, 23));
-        jDunButton.setMinimumSize(new java.awt.Dimension(75, 23));
-        jDunButton.setPreferredSize(new java.awt.Dimension(51, 40));
-        jDunButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDunButtonActionPerformed(evt);
-            }
-        });
-
-        jBirAyButton.setText("Son 1 Ay");
-        jBirAyButton.setPreferredSize(new java.awt.Dimension(75, 40));
-        jBirAyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBirAyButtonActionPerformed(evt);
-            }
-        });
-
-        jBirYılButton.setText("Son 1 Yıl");
-        jBirYılButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBirYılButtonActionPerformed(evt);
-            }
-        });
-
-        jButunButton.setText("Bütün Tarihler");
-        jButunButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButunButtonActionPerformed(evt);
-            }
-        });
-
         jWeasisButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
         jWeasisButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWeasisButtonActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajax-loader.gif"))); // NOI18N
-        jLabel1.setDisabledIcon(null);
-
-        Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
-        Yenile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YenileActionPerformed(evt);
-            }
-        });
-
-        jFiltCheck.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jFiltCheck.setText("Filtreleme");
 
         jWebViewerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data-transfer.png"))); // NOI18N
         jWebViewerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -283,76 +213,23 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFiltCheck)
-                    .addComponent(jDunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBirAyButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                    .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButunButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                    .addComponent(jBirYılButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jAltiAyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(jWebViewerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jWebViewerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                        .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jFiltCheck)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jAltiAyButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                                            .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jBirYılButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(8, 8, 8)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jBirAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jWebViewerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jWeasisButton, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addComponent(jWebViewerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Hasta Bilgileri"));
 
         jPatientName.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jPatientName.setText("Hastanın Adı Soyadı     :");
@@ -388,7 +265,150 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPatientSex)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPatientBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(42, 42, 42))
+        );
+
+        Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
+        Yenile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YenileActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ajax-loader.gif"))); // NOI18N
+        jLabel1.setDisabledIcon(null);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jFiltCheck.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jFiltCheck.setText("Filtreleme");
+
+        jBugunButton.setText("Bugün");
+        jBugunButton.setMaximumSize(new java.awt.Dimension(75, 23));
+        jBugunButton.setMinimumSize(new java.awt.Dimension(75, 23));
+        jBugunButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBugunButtonActionPerformed(evt);
+            }
+        });
+
+        jDunButton.setText("Dün");
+        jDunButton.setMaximumSize(new java.awt.Dimension(75, 23));
+        jDunButton.setMinimumSize(new java.awt.Dimension(75, 23));
+        jDunButton.setPreferredSize(new java.awt.Dimension(51, 40));
+        jDunButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDunButtonActionPerformed(evt);
+            }
+        });
+
+        jBirAyButton.setText("Son 1 Ay");
+        jBirAyButton.setPreferredSize(new java.awt.Dimension(75, 40));
+        jBirAyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBirAyButtonActionPerformed(evt);
+            }
+        });
+
+        jAltiAyButton.setText("Son 6 Ay");
+        jAltiAyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAltiAyButtonActionPerformed(evt);
+            }
+        });
+
+        jBirYılButton.setText("Son 1 Yıl");
+        jBirYılButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBirYılButtonActionPerformed(evt);
+            }
+        });
+
+        jButunButton.setText("Bütün Tarihler");
+        jButunButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButunButtonActionPerformed(evt);
+            }
+        });
+
+        jModalityCombo.setFont(new java.awt.Font("Times New Roman", 0, 28)); // NOI18N
+        jModalityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC", "CR", "KO", "IO" }));
+        jModalityCombo.setToolTipText("");
+        jModalityCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jModalityComboActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Modality Filtresi");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDunButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jFiltCheck, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBirAyButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBirYılButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jAltiAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jModalityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFiltCheck)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jModalityCombo)
+                    .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jAltiAyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jDunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBirYılButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBirAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,21 +418,28 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1268, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -420,14 +447,48 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void YenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YenileActionPerformed
+        String[][] result3 = null;
+        try {
+            result3 = baslangic();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            new MainFrame(result3, url, argIP, argPort);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_YenileActionPerformed
+
+    private void jWebViewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWebViewerButtonActionPerformed
+        try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            String webURL = "http://" + argIP + ":" + webPort + "/incele?id=" + patientId;
+            URI oURL = new URI(webURL);
+            desktop.browse(oURL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jWebViewerButtonActionPerformed
+
+    private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
+        // TODO add your handling code here:
+        if (selected.size() > 0) {
+            studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
+        }
+        System.out.println("*************");
+        System.out.println(selected.size());
+    }//GEN-LAST:event_jWeasisButtonActionPerformed
+
+    private void jModalityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModalityComboActionPerformed
 
         selected.clear();
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
 
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
         jTable1.setRowSorter(sorter);
-        String queryMod = jComboBox1.getSelectedItem().toString();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
         RowFilter<DefaultTableModel, Object> firstFiler = null;
 
@@ -457,25 +518,22 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jModalityComboActionPerformed
 
-    private void jBugunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunButtonActionPerformed
+    private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
+
         selected.clear();
-        Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-        cal.add(Calendar.DATE, 0);
-        System.out.println("Today " + dateFormat.format(cal.getTime()));
 
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
         jTable1.setRowSorter(sorter);
+
         RowFilter<DefaultTableModel, Object> firstFiler = null;
 
         List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
         RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
         try {
-            firstFiler = RowFilter.regexFilter(dateFormat.format(cal.getTime()), 2);
+            firstFiler = RowFilter.regexFilter("", 2);
 
             filters.add(firstFiler);
 
@@ -483,23 +541,67 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
+        sorter.setRowFilter(compoundRowFilter);
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            selected.add(jTable1.getValueAt(i, 4).toString());
+            jTable1.setValueAt(true, i, 6);
+        }
+    }//GEN-LAST:event_jButunButtonActionPerformed
+
+    private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
 
         if (jFiltCheck.isSelected()) {
-            sorter.setRowFilter(compoundRowFilter);
+            selected.clear();
+            try {
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                Date now = new Date();
+                String a = formater.format(now);
+
+                Date now2 = formater.parse(a);
+                System.out.print(now2);
+
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.MONTH, -12);
+                Date endDate = cal.getTime();
+                String b = formater.format(endDate);
+
+                Date date4 = formater.parse(b);
+                System.out.print(date4.toString());
+
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+                jTable1.setRowSorter(sorter);
+                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
+                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
+                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
+                RowFilter<DefaultTableModel, Object> rf = null;
+                rf = RowFilter.andFilter(filters);
+                sorter.setRowFilter(rf);
+            } catch (ParseException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 selected.add(jTable1.getValueAt(i, 4).toString());
                 jTable1.setValueAt(true, i, 6);
             }
         } else {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
+            for (int k = 0; k < 366; k++) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+                cal.add(Calendar.DATE, -k);
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                        selected.add(jTable1.getValueAt(i, 4).toString());
+                        jTable1.setValueAt(true, i, 6);
+                    }
                 }
             }
         }
-    }//GEN-LAST:event_jBugunButtonActionPerformed
+    }//GEN-LAST:event_jBirYılButtonActionPerformed
 
     private void jAltiAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyButtonActionPerformed
         if (jFiltCheck.isSelected()) {
@@ -649,74 +751,23 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDunButtonActionPerformed
 
-    private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
-
-        if (jFiltCheck.isSelected()) {
-            selected.clear();
-            try {
-                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-                Date now = new Date();
-                String a = formater.format(now);
-
-                Date now2 = formater.parse(a);
-                System.out.print(now2);
-
-                Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.MONTH, -12);
-                Date endDate = cal.getTime();
-                String b = formater.format(endDate);
-
-                Date date4 = formater.parse(b);
-                System.out.print(date4.toString());
-
-                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-                jTable1.setRowSorter(sorter);
-                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-                RowFilter<DefaultTableModel, Object> rf = null;
-                rf = RowFilter.andFilter(filters);
-                sorter.setRowFilter(rf);
-            } catch (ParseException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int k = 0; k < 366; k++) {
-                Calendar cal = Calendar.getInstance();
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                cal.add(Calendar.DATE, -k);
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-
-                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                        selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_jBirYılButtonActionPerformed
-
-    private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
-
+    private void jBugunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunButtonActionPerformed
         selected.clear();
+        Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        cal.add(Calendar.DATE, 0);
+        System.out.println("Today " + dateFormat.format(cal.getTime()));
 
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
         jTable1.setRowSorter(sorter);
-
         RowFilter<DefaultTableModel, Object> firstFiler = null;
 
         List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
         RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
         try {
-            firstFiler = RowFilter.regexFilter("", 2);
+            firstFiler = RowFilter.regexFilter(dateFormat.format(cal.getTime()), 2);
 
             filters.add(firstFiler);
 
@@ -724,48 +775,23 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        sorter.setRowFilter(compoundRowFilter);
 
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            selected.add(jTable1.getValueAt(i, 4).toString());
-            jTable1.setValueAt(true, i, 6);
+        if (jFiltCheck.isSelected()) {
+            sorter.setRowFilter(compoundRowFilter);
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        } else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                    selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
         }
-    }//GEN-LAST:event_jButunButtonActionPerformed
-
-    private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
-        // TODO add your handling code here:
-        if (selected.size() > 0) {
-            studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
-        }
-        System.out.println("*************");
-        System.out.println(selected.size());
-
-    }//GEN-LAST:event_jWeasisButtonActionPerformed
-
-    private void YenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YenileActionPerformed
-        String[][] result3 = null;
-        try {
-            result3 = baslangic();
-        } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            new MainFrame(result3, url, argIP, argPort);
-        } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_YenileActionPerformed
-
-    private void jWebViewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWebViewerButtonActionPerformed
-        try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            String webURL = "http://" + argIP + ":" + webPort + "/incele?id=" + patientId;
-            URI oURL = new URI(webURL);
-            desktop.browse(oURL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jWebViewerButtonActionPerformed
+    }//GEN-LAST:event_jBugunButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
@@ -1031,13 +1057,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jBirYılButton;
     private javax.swing.JButton jBugunButton;
     private javax.swing.JButton jButunButton;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JButton jDunButton;
-    public static javax.swing.JCheckBox jFiltCheck;
+    private javax.swing.JCheckBox jFiltCheck;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JComboBox<String> jModalityCombo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     public static javax.swing.JLabel jPatientBirthDate;
     public static javax.swing.JLabel jPatientID;
     public static javax.swing.JLabel jPatientName;
