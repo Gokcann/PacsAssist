@@ -8,6 +8,7 @@ package com.company;
 //import static com.company.JTableExamples.resize;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -64,6 +66,7 @@ public class MainFrame extends javax.swing.JFrame {
     public static String argIP;
     public static String url;
     public static String patientId;
+    public static String webPort;
     UrlCreator urlCreator = new UrlCreator();
     StudyOpen studyOpen = new StudyOpen();
     URL url3 = MainFrame.class.getResource("/Logo.png");
@@ -150,6 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Yenile = new javax.swing.JButton();
         jFiltCheck = new javax.swing.JCheckBox();
+        jWebViewerButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPatientName = new javax.swing.JLabel();
         jPatientID = new javax.swing.JLabel();
@@ -267,6 +271,13 @@ public class MainFrame extends javax.swing.JFrame {
         jFiltCheck.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFiltCheck.setText("Filtreleme");
 
+        jWebViewerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data-transfer.png"))); // NOI18N
+        jWebViewerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jWebViewerButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -291,7 +302,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(jWebViewerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                         .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
@@ -321,16 +336,18 @@ public class MainFrame extends javax.swing.JFrame {
                                             .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBirYılButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBirAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jBirYılButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(8, 8, 8)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jBirAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jWebViewerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -473,123 +490,121 @@ public class MainFrame extends javax.swing.JFrame {
                 selected.add(jTable1.getValueAt(i, 4).toString());
                 jTable1.setValueAt(true, i, 6);
             }
-        }   else {
-              for (int i = 0; i < jTable1.getRowCount(); i++) {
+        } else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
                 if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                     selected.add(jTable1.getValueAt(i, 4).toString());
                     jTable1.setValueAt(true, i, 6);
                 }
-            } 
+            }
         }
     }//GEN-LAST:event_jBugunButtonActionPerformed
 
     private void jAltiAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyButtonActionPerformed
-       if(jFiltCheck.isSelected())  {
-        selected.clear();
-        try {
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            Date now = new Date();
-            String a = formater.format(now);
+        if (jFiltCheck.isSelected()) {
+            selected.clear();
+            try {
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                Date now = new Date();
+                String a = formater.format(now);
 
-            Date now2 = formater.parse(a);
-            System.out.print(now2);
+                Date now2 = formater.parse(a);
+                System.out.print(now2);
 
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.MONTH, -6);
-            Date endDate = cal.getTime();
-            String b = formater.format(endDate);
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.MONTH, -6);
+                Date endDate = cal.getTime();
+                String b = formater.format(endDate);
 
-            Date date4 = formater.parse(b);
-            System.out.print(date4.toString());
+                Date date4 = formater.parse(b);
+                System.out.print(date4.toString());
 
-            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-            jTable1.setRowSorter(sorter);
-            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-            filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-            filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-            RowFilter<DefaultTableModel, Object> rf = null;
-            rf = RowFilter.andFilter(filters);
-            sorter.setRowFilter(rf);
-        } catch (ParseException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+                jTable1.setRowSorter(sorter);
+                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
+                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
+                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
+                RowFilter<DefaultTableModel, Object> rf = null;
+                rf = RowFilter.andFilter(filters);
+                sorter.setRowFilter(rf);
+            } catch (ParseException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            selected.add(jTable1.getValueAt(i, 4).toString());
-            jTable1.setValueAt(true, i, 6);
-        }
-       }
-       else {
-           for (int k = 0;k < 185; k++) {
-           Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        } else {
+            for (int k = 0; k < 185; k++) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        cal.add(Calendar.DATE, -k);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-               
-                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
+                cal.add(Calendar.DATE, -k);
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                        selected.add(jTable1.getValueAt(i, 4).toString());
+                        jTable1.setValueAt(true, i, 6);
+                    }
                 }
-           }
-       }
-       }
+            }
+        }
     }//GEN-LAST:event_jAltiAyButtonActionPerformed
 
     private void jBirAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyButtonActionPerformed
-if(jFiltCheck.isSelected())  {
-        selected.clear();
-        try {
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            Date now = new Date();
-            String a = formater.format(now);
+        if (jFiltCheck.isSelected()) {
+            selected.clear();
+            try {
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                Date now = new Date();
+                String a = formater.format(now);
 
-            Date now2 = formater.parse(a);
-            System.out.print(now2);
+                Date now2 = formater.parse(a);
+                System.out.print(now2);
 
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.MONTH, -1);
-            Date endDate = cal.getTime();
-            String b = formater.format(endDate);
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.MONTH, -1);
+                Date endDate = cal.getTime();
+                String b = formater.format(endDate);
 
-            Date date4 = formater.parse(b);
-            System.out.print(date4.toString());
+                Date date4 = formater.parse(b);
+                System.out.print(date4.toString());
 
-            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-            jTable1.setRowSorter(sorter);
-            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-            filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-            filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-            RowFilter<DefaultTableModel, Object> rf = null;
-            rf = RowFilter.andFilter(filters);
-            sorter.setRowFilter(rf);
-        } catch (ParseException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+                jTable1.setRowSorter(sorter);
+                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
+                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
+                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
+                RowFilter<DefaultTableModel, Object> rf = null;
+                rf = RowFilter.andFilter(filters);
+                sorter.setRowFilter(rf);
+            } catch (ParseException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            selected.add(jTable1.getValueAt(i, 4).toString());
-            jTable1.setValueAt(true, i, 6);
-        }
-       }
-       else {
-           for (int k = 0;k < 32; k++) {
-           Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        } else {
+            for (int k = 0; k < 32; k++) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        cal.add(Calendar.DATE, -k);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-               
-                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
+                cal.add(Calendar.DATE, -k);
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                        selected.add(jTable1.getValueAt(i, 4).toString());
+                        jTable1.setValueAt(true, i, 6);
+                    }
                 }
-           }
-       }
-       }
+            }
+        }
     }//GEN-LAST:event_jBirAyButtonActionPerformed
 
     private void jDunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunButtonActionPerformed
@@ -623,70 +638,69 @@ if(jFiltCheck.isSelected())  {
                 selected.add(jTable1.getValueAt(i, 4).toString());
                 jTable1.setValueAt(true, i, 6);
             }
-        }   else {
-              for (int i = 0; i < jTable1.getRowCount(); i++) {
+        } else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
                 if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                     selected.add(jTable1.getValueAt(i, 4).toString());
                     jTable1.setValueAt(true, i, 6);
                 }
-            } 
+            }
         }
     }//GEN-LAST:event_jDunButtonActionPerformed
 
     private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
 
-        if(jFiltCheck.isSelected())  {
-        selected.clear();
-        try {
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            Date now = new Date();
-            String a = formater.format(now);
+        if (jFiltCheck.isSelected()) {
+            selected.clear();
+            try {
+                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+                Date now = new Date();
+                String a = formater.format(now);
 
-            Date now2 = formater.parse(a);
-            System.out.print(now2);
+                Date now2 = formater.parse(a);
+                System.out.print(now2);
 
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.MONTH, -12);
-            Date endDate = cal.getTime();
-            String b = formater.format(endDate);
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.MONTH, -12);
+                Date endDate = cal.getTime();
+                String b = formater.format(endDate);
 
-            Date date4 = formater.parse(b);
-            System.out.print(date4.toString());
+                Date date4 = formater.parse(b);
+                System.out.print(date4.toString());
 
-            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-            jTable1.setRowSorter(sorter);
-            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-            filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-            filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-            RowFilter<DefaultTableModel, Object> rf = null;
-            rf = RowFilter.andFilter(filters);
-            sorter.setRowFilter(rf);
-        } catch (ParseException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+                jTable1.setRowSorter(sorter);
+                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
+                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
+                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
+                RowFilter<DefaultTableModel, Object> rf = null;
+                rf = RowFilter.andFilter(filters);
+                sorter.setRowFilter(rf);
+            } catch (ParseException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            selected.add(jTable1.getValueAt(i, 4).toString());
-            jTable1.setValueAt(true, i, 6);
-        }
-       }
-       else {
-           for (int k = 0;k < 366; k++) {
-           Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        } else {
+            for (int k = 0; k < 366; k++) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        cal.add(Calendar.DATE, -k);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-               
-                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
+                cal.add(Calendar.DATE, -k);
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
+                        selected.add(jTable1.getValueAt(i, 4).toString());
+                        jTable1.setValueAt(true, i, 6);
+                    }
                 }
-           }
-       }
-       }
+            }
+        }
     }//GEN-LAST:event_jBirYılButtonActionPerformed
 
     private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
@@ -741,6 +755,17 @@ if(jFiltCheck.isSelected())  {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_YenileActionPerformed
+
+    private void jWebViewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWebViewerButtonActionPerformed
+        try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            String webURL = "http://" + argIP + ":" + webPort + "/incele?id=" + patientId;
+            URI oURL = new URI(webURL);
+            desktop.browse(oURL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jWebViewerButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
@@ -950,6 +975,7 @@ if(jFiltCheck.isSelected())  {
         url = args[1];
         argIP = args[2];
         argPort = args[3];
+        webPort = args[4];
 
         String[][] result2 = baslangic();
 
@@ -1019,5 +1045,6 @@ if(jFiltCheck.isSelected())  {
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
     private javax.swing.JButton jWeasisButton;
+    private javax.swing.JButton jWebViewerButton;
     // End of variables declaration//GEN-END:variables
 }
