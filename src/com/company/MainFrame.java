@@ -70,6 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
     UrlCreator urlCreator = new UrlCreator();
     StudyOpen studyOpen = new StudyOpen();
     URL url3 = MainFrame.class.getResource("/Logo.png");
+    Actions actions = new Actions();
 
     /**
      * Creates new form MainFrame
@@ -462,14 +463,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_YenileActionPerformed
 
     private void jWebViewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWebViewerButtonActionPerformed
-        try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            String webURL = "http://" + argIP + ":" + webPort + "/incele?id=" + patientId;
-            URI oURL = new URI(webURL);
-            desktop.browse(oURL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        actions.openWeb(argIP,webPort,patientId);
     }//GEN-LAST:event_jWebViewerButtonActionPerformed
 
     private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
@@ -483,314 +477,39 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jModalityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModalityComboActionPerformed
 
-        selected.clear();
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
         String queryMod = jModalityCombo.getSelectedItem().toString();
-
-        RowFilter<DefaultTableModel, Object> firstFiler = null;
-
-        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
-        try {
-            firstFiler = RowFilter.regexFilter(queryMod, 1);
-
-            filters.add(firstFiler);
-
-            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-        if (jFiltCheck.isSelected()) {
-            sorter.setRowFilter(compoundRowFilter);
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).equals(queryMod + "  -  [1]")) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-        }
+        actions.selectedComboBox(queryMod,jFiltCheck.isSelected());
+       
     }//GEN-LAST:event_jModalityComboActionPerformed
 
     private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
 
-        selected.clear();
-
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
-
-        RowFilter<DefaultTableModel, Object> firstFiler = null;
-
-        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
-        try {
-            firstFiler = RowFilter.regexFilter("", 2);
-
-            filters.add(firstFiler);
-
-            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-        sorter.setRowFilter(compoundRowFilter);
-
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            selected.add(jTable1.getValueAt(i, 4).toString());
-            jTable1.setValueAt(true, i, 6);
-        }
+        actions.tumZamanlarFiltre();
+        
     }//GEN-LAST:event_jButunButtonActionPerformed
 
     private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
 
-        if (jFiltCheck.isSelected()) {
-            selected.clear();
-            try {
-                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-                Date now = new Date();
-                String a = formater.format(now);
-
-                Date now2 = formater.parse(a);
-                System.out.print(now2);
-
-                Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.MONTH, -12);
-                Date endDate = cal.getTime();
-                String b = formater.format(endDate);
-
-                Date date4 = formater.parse(b);
-                System.out.print(date4.toString());
-
-                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-                jTable1.setRowSorter(sorter);
-                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-                RowFilter<DefaultTableModel, Object> rf = null;
-                rf = RowFilter.andFilter(filters);
-                sorter.setRowFilter(rf);
-            } catch (ParseException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int k = 0; k < 366; k++) {
-                Calendar cal = Calendar.getInstance();
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                cal.add(Calendar.DATE, -k);
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-
-                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                        selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
-                    }
-                }
-            }
-        }
+        actions.birYilFiltre(jFiltCheck.isSelected());
+        
     }//GEN-LAST:event_jBirYılButtonActionPerformed
 
     private void jAltiAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyButtonActionPerformed
-        if (jFiltCheck.isSelected()) {
-            selected.clear();
-            try {
-                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-                Date now = new Date();
-                String a = formater.format(now);
-
-                Date now2 = formater.parse(a);
-                System.out.print(now2);
-
-                Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.MONTH, -6);
-                Date endDate = cal.getTime();
-                String b = formater.format(endDate);
-
-                Date date4 = formater.parse(b);
-                System.out.print(date4.toString());
-
-                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-                jTable1.setRowSorter(sorter);
-                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-                RowFilter<DefaultTableModel, Object> rf = null;
-                rf = RowFilter.andFilter(filters);
-                sorter.setRowFilter(rf);
-            } catch (ParseException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int k = 0; k < 185; k++) {
-                Calendar cal = Calendar.getInstance();
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                cal.add(Calendar.DATE, -k);
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-
-                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                        selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
-                    }
-                }
-            }
-        }
+        actions.altiAyFiltre(jFiltCheck.isSelected());
     }//GEN-LAST:event_jAltiAyButtonActionPerformed
 
     private void jBirAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyButtonActionPerformed
-        if (jFiltCheck.isSelected()) {
-            selected.clear();
-            try {
-                SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-                Date now = new Date();
-                String a = formater.format(now);
-
-                Date now2 = formater.parse(a);
-                System.out.print(now2);
-
-                Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.MONTH, -1);
-                Date endDate = cal.getTime();
-                String b = formater.format(endDate);
-
-                Date date4 = formater.parse(b);
-                System.out.print(date4.toString());
-
-                DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-                TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-                jTable1.setRowSorter(sorter);
-                List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-                filters.add(RowFilter.dateFilter(ComparisonType.AFTER, date4));
-                filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now2));
-                RowFilter<DefaultTableModel, Object> rf = null;
-                rf = RowFilter.andFilter(filters);
-                sorter.setRowFilter(rf);
-            } catch (ParseException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int k = 0; k < 32; k++) {
-                Calendar cal = Calendar.getInstance();
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-                cal.add(Calendar.DATE, -k);
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-
-                    if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                        selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
-                    }
-                }
-            }
-        }
+        actions.birAyFiltre(jFiltCheck.isSelected());
     }//GEN-LAST:event_jBirAyButtonActionPerformed
 
     private void jDunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunButtonActionPerformed
         // TODO add your handling code here:
-        selected.clear();
-        Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-        cal.add(Calendar.DATE, -1);
-        System.out.println("Yesterday's date was " + dateFormat.format(cal.getTime()));
-
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
-        RowFilter<DefaultTableModel, Object> firstFiler = null;
-
-        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
-        try {
-            firstFiler = RowFilter.regexFilter(dateFormat.format(cal.getTime()), 2);
-
-            filters.add(firstFiler);
-
-            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-        if (jFiltCheck.isSelected()) {
-            sorter.setRowFilter(compoundRowFilter);
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-        }
+        actions.dunFiltre(jFiltCheck.isSelected());
     }//GEN-LAST:event_jDunButtonActionPerformed
 
     private void jBugunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunButtonActionPerformed
-        selected.clear();
-        Calendar cal = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-        cal.add(Calendar.DATE, 0);
-        System.out.println("Today " + dateFormat.format(cal.getTime()));
-
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
-        RowFilter<DefaultTableModel, Object> firstFiler = null;
-
-        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
-        try {
-            firstFiler = RowFilter.regexFilter(dateFormat.format(cal.getTime()), 2);
-
-            filters.add(firstFiler);
-
-            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-
-        if (jFiltCheck.isSelected()) {
-            sorter.setRowFilter(compoundRowFilter);
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } else {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
-                    selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-        }
+        actions.bugunFiltre(jFiltCheck.isSelected());
+        
     }//GEN-LAST:event_jBugunButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
