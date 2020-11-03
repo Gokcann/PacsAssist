@@ -26,11 +26,11 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author CAGDAS
+ * @author Metasoft
  */
 public class Actions {
-    
-    public void openWeb(String argIP, String webPort,String patientId) {
+
+    public void openWeb(String argIP, String webPort, String patientId) {
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
             String webURL = "http://" + argIP + ":" + webPort + "/incele?id=" + patientId;
@@ -40,8 +40,8 @@ public class Actions {
             e.printStackTrace();
         }
     }
-    
-    public void selectedComboBox(String queryMod,boolean filtCheck){
+
+    public void selectedComboBox(String queryMod, boolean filtCheck) {
         MainFrame.selected.clear();
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
 
@@ -62,25 +62,75 @@ public class Actions {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        if (filtCheck) {
+        if (filtCheck) {            
             sorter.setRowFilter(compoundRowFilter);
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                 jTable1.setValueAt(true, i, 6);
             }
-        } else {
+        } else if (MainFrame.jBirYilTButton.isSelected()) {
+
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).equals(queryMod + "  -  [1]")) {
+                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+            birYilFiltre(filtCheck);
+        } else if (MainFrame.jAltiAyTButton.isSelected()) {
+
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+            altiAyFiltre(filtCheck);
+        }else if (MainFrame.jBirAyTButton.isSelected()) {
+
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+            birAyFiltre(filtCheck);
+        }else if (MainFrame.jDunTButton.isSelected()) {
+
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+            dunFiltre(filtCheck);
+        }else if (MainFrame.jBugunTButton.isSelected()) {
+
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+            bugunFiltre(filtCheck);
+        }else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                     jTable1.setValueAt(true, i, 6);
                 }
             }
         }
     }
-    
+
     public void tumZamanlarFiltre() {
-    MainFrame.selected.clear();
+        MainFrame.selected.clear();
 
         DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
@@ -110,10 +160,16 @@ public class Actions {
                 selected.clear();
             }
         }
-}
-    
+    }
+
     public void birYilFiltre(boolean filtcheck) {
-        MainFrame.selected.clear();
+        String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
+        if (!queryMod.equals("")){  
+        }
+        else{
+         MainFrame.selected.clear();
+        }
+            
         if (filtcheck) {            
             try {
                 SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
@@ -174,10 +230,15 @@ public class Actions {
             }
         }
     }
-    
+
     public void altiAyFiltre(boolean filtcheck) {
-        MainFrame.selected.clear();
-        if (filtcheck) {            
+        String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
+        if (!queryMod.equals("")){  
+        }
+        else{
+         MainFrame.selected.clear();
+        }
+        if (filtcheck) {
             try {
                 SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
                 Date now = new Date();
@@ -237,10 +298,15 @@ public class Actions {
             }
         }
     }
-    
+
     public void birAyFiltre(boolean filtcheck) {
-        MainFrame.selected.clear();
-        if (filtcheck) {            
+        String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
+        if (!queryMod.equals("")){  
+        }
+        else{
+         MainFrame.selected.clear();
+        }
+        if (filtcheck) {
             try {
                 SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
                 Date now = new Date();
@@ -300,9 +366,9 @@ public class Actions {
             }
         }
     }
-    
+
     public void dunFiltre(boolean filtcheck) {
-        MainFrame.selected.clear();
+        //MainFrame.selected.clear();
         Calendar cal = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -351,9 +417,9 @@ public class Actions {
             }
         }
     }
-    
+
     public void bugunFiltre(boolean filtcheck) {
-        MainFrame.selected.clear();
+        //MainFrame.selected.clear();
         Calendar cal = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -380,7 +446,7 @@ public class Actions {
         if (filtcheck) {
             sorter.setRowFilter(compoundRowFilter);
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());                
+                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                 if (jBugunTButton.isSelected()) {
                     jTable1.setValueAt(true, i, 6);
                 } else {
@@ -393,7 +459,7 @@ public class Actions {
                 //jTable1.setValueAt(false, i, 6);
                 if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                     if (jBugunTButton.isSelected()) {
+                    if (jBugunTButton.isSelected()) {
                         jTable1.setValueAt(true, i, 6);
                     } else {
                         jTable1.setValueAt(false, i, 6);
@@ -403,5 +469,5 @@ public class Actions {
             }
         }
     }
-    
+
 }

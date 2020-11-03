@@ -6,56 +6,28 @@
 package com.company;
 
 //import static com.company.JTableExamples.resize;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultCellEditor;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.RowFilter;
-import javax.swing.RowFilter.ComparisonType;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -74,62 +46,12 @@ public class MainFrame extends javax.swing.JFrame {
     URL url3 = MainFrame.class.getResource("/Logo.png");
     Actions actions = new Actions();
 
-
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-    }
-
-    public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
-
-        private static final long serialVersionUID = 1L;
-        private JCheckBox checkBox;
-
-        private int row;
-        private int column;
-
-        public CheckBoxEditor(JCheckBox checkBox) {
-            super(checkBox);
-            this.checkBox = checkBox;
-            this.checkBox.addItemListener(this);
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            this.row = row;
-            this.column = column;
-            checkBox.setSelected((Boolean) value);
-            return super.getTableCellEditorComponent(table, value, isSelected, row, column);
-            //checkBox.setSize(10,10);
-            //return checkBox;
-        }
-
-        //final int[] rows = new int[1];
-        public void itemStateChanged(ItemEvent e) {
-            this.fireEditingStopped();
-            //rows[0] = jTable1.getSelectedRow(); // select a row
-            String id = jTable1.getValueAt(row, 4).toString();
-            System.out.println("Item Changed " + row + " value is: " + checkBox.isSelected());
-
-            if (checkBox.isSelected() && (selected.indexOf(id) == -1)) {
-
-                selected.add(id);
-                for (int i = 0; i < selected.size(); i++) {
-                    System.out.println("Selected:" + selected.get(i));
-                }
-            }
-            if (!checkBox.isSelected()) {
-                selected.remove(selected.indexOf(id));
-                for (int i = 0; i < selected.size(); i++) {
-                    System.out.println("Selected:" + selected.get(i));
-                }
-            }
-            System.out.println("//////////////////" + selected.size());
-        }
-    }
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -488,7 +410,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jBugunTButtonActionPerformed
 
     private void jDunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunTButtonActionPerformed
-        actions.dunFiltre(jFiltCheck.isSelected());
+        actions.dunFiltre(jFiltCheck.isSelected());        
     }//GEN-LAST:event_jDunTButtonActionPerformed
 
     private void jBirAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyTButtonActionPerformed
@@ -784,7 +706,7 @@ public class MainFrame extends javax.swing.JFrame {
     public static javax.swing.JToggleButton jHepsiTButton;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JComboBox<String> jModalityCombo;
+    public static javax.swing.JComboBox<String> jModalityCombo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
