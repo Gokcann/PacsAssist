@@ -414,16 +414,41 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jDunTButtonActionPerformed
 
     private void jBirAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyTButtonActionPerformed
-        actions.birAyFiltre(jFiltCheck.isSelected());
+        actions.birAyFiltre(jFiltCheck.isSelected(),true);
+        
+        jHepsiTButton.setSelected(false);
+        jAltiAyTButton.setSelected(false);
+        jBirYilTButton.setSelected(false);
+        jDunTButton.setSelected(false);
+        jBugunTButton.setSelected(false);
+        if(!jBirAyTButton.isSelected()) {
+            String queryMod = jModalityCombo.getSelectedItem().toString();
+            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
+        }
     }//GEN-LAST:event_jBirAyTButtonActionPerformed
 
     private void jAltiAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyTButtonActionPerformed
-        actions.altiAyFiltre(jFiltCheck.isSelected());
+        actions.altiAyFiltre(jFiltCheck.isSelected(),true);
+        
+        jHepsiTButton.setSelected(false);
+        jBirYilTButton.setSelected(false);
+        jBirAyTButton.setSelected(false);
+        jDunTButton.setSelected(false);
+        jBugunTButton.setSelected(false);
+        if(!jAltiAyTButton.isSelected()) {
+            String queryMod = jModalityCombo.getSelectedItem().toString();
+            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
+        }
     }//GEN-LAST:event_jAltiAyTButtonActionPerformed
 
     private void jBirYilTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYilTButtonActionPerformed
         actions.birYilFiltre(jFiltCheck.isSelected(),true);
         
+        jHepsiTButton.setSelected(false);
+        jAltiAyTButton.setSelected(false);
+        jBirAyTButton.setSelected(false);
+        jDunTButton.setSelected(false);
+        jBugunTButton.setSelected(false);
         if(!jBirYilTButton.isSelected()) {
             String queryMod = jModalityCombo.getSelectedItem().toString();
             actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
@@ -432,6 +457,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jHepsiTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHepsiTButtonActionPerformed
         actions.tumZamanlarFiltre();
+        jBirYilTButton.setSelected(false);
+        jAltiAyTButton.setSelected(false);
+        jBirAyTButton.setSelected(false);
+        jDunTButton.setSelected(false);
+        jBugunTButton.setSelected(false);
+        if(!jHepsiTButton.isSelected()) {
+            String queryMod = jModalityCombo.getSelectedItem().toString();
+            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
+        }
     }//GEN-LAST:event_jHepsiTButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {

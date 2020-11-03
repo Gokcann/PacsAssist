@@ -87,7 +87,7 @@ public class Actions {
                     jTable1.setValueAt(true, i, 6);
                 }
             }
-            altiAyFiltre(filtCheck);
+            altiAyFiltre(filtCheck,false);
         }else if (MainFrame.jBirAyTButton.isSelected()) {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
@@ -97,7 +97,7 @@ public class Actions {
                     jTable1.setValueAt(true, i, 6);
                 }
             }
-            birAyFiltre(filtCheck);
+            birAyFiltre(filtCheck,false);
         }else if (MainFrame.jDunTButton.isSelected()) {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
@@ -127,7 +127,7 @@ public class Actions {
                 }
             }
         }
-    }
+    }//
 
     public void tumZamanlarFiltre() {
         MainFrame.selected.clear();
@@ -230,11 +230,9 @@ public class Actions {
         }
     }
 
-    public void altiAyFiltre(boolean filtcheck) {
+    public void altiAyFiltre(boolean filtcheck,boolean select) {
         String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
-        if (!queryMod.equals("")){  
-        }
-        else{
+        if(select){  
          MainFrame.selected.clear();
         }
         if (filtcheck) {
@@ -298,11 +296,9 @@ public class Actions {
         }
     }
 
-    public void birAyFiltre(boolean filtcheck) {
+    public void birAyFiltre(boolean filtcheck,boolean select) {
         String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
-        if (!queryMod.equals("")){  
-        }
-        else{
+        if(select){  
          MainFrame.selected.clear();
         }
         if (filtcheck) {
