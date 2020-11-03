@@ -422,7 +422,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jAltiAyTButtonActionPerformed
 
     private void jBirYilTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYilTButtonActionPerformed
-        actions.birYilFiltre(jFiltCheck.isSelected());
+        actions.birYilFiltre(jFiltCheck.isSelected(),true);
+        
+        if(!jBirYilTButton.isSelected()) {
+            String queryMod = jModalityCombo.getSelectedItem().toString();
+            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
+        }
     }//GEN-LAST:event_jBirYilTButtonActionPerformed
 
     private void jHepsiTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHepsiTButtonActionPerformed
@@ -575,11 +580,12 @@ public class MainFrame extends javax.swing.JFrame {
                 if (me.getClickCount() == 2) {     // to detect doble click events
 
                     row[0] = jTable1.getSelectedRow();
-                    selected.add(jTable1.getValueAt(row[0], 4).toString());
                     if (jTable1.getValueAt(row[0], 6).equals(false)) {
                         jTable1.setValueAt(true, row[0], 6);
+                        selected.add(jTable1.getValueAt(row[0], 4).toString());
                     } else {
                         jTable1.setValueAt(false, row[0], 6);
+                        selected.remove(jTable1.getValueAt(row[0], 4).toString());
                     }
                     /*
                     row[0] = jTable1.getSelectedRow(); // select a row

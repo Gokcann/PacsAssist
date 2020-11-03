@@ -77,7 +77,7 @@ public class Actions {
                     jTable1.setValueAt(true, i, 6);
                 }
             }
-            birYilFiltre(filtCheck);
+            birYilFiltre(filtCheck,false);
         } else if (MainFrame.jAltiAyTButton.isSelected()) {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
@@ -121,7 +121,7 @@ public class Actions {
         }else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                if ( (!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                     jTable1.setValueAt(true, i, 6);
                 }
@@ -162,11 +162,10 @@ public class Actions {
         }
     }
 
-    public void birYilFiltre(boolean filtcheck) {
+    public void birYilFiltre(boolean filtcheck,boolean  select) {
         String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
-        if (!queryMod.equals("")){  
-        }
-        else{
+        
+        if(select){  
          MainFrame.selected.clear();
         }
             
