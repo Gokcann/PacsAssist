@@ -23,7 +23,7 @@ public class QueryProcess {
         BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
-
+        
         try {
             //URL url = new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies");
             String myURL = urlArgs + "rs/studies?PatientID=" + patientArgs;

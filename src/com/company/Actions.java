@@ -5,7 +5,9 @@
  */
 package com.company;
 
+import static com.company.MainFrame.jBugunTButton;
 import static com.company.MainFrame.jTable1;
+import static com.company.MainFrame.selected;
 import java.awt.Desktop;
 import java.net.URI;
 import java.text.DateFormat;
@@ -101,14 +103,18 @@ public class Actions {
 
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-            jTable1.setValueAt(true, i, 6);
+            if (MainFrame.jHepsiTButton.isSelected()) {
+                jTable1.setValueAt(true, i, 6);
+            } else {
+                jTable1.setValueAt(false, i, 6);
+                selected.clear();
+            }
         }
 }
     
     public void birYilFiltre(boolean filtcheck) {
-        
-        if (filtcheck) {
-            MainFrame.selected.clear();
+        MainFrame.selected.clear();
+        if (filtcheck) {            
             try {
                 SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
                 Date now = new Date();
@@ -140,7 +146,12 @@ public class Actions {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
+                if (MainFrame.jBirYilTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else {
+                    jTable1.setValueAt(false, i, 6);
+                    selected.remove(jTable1.getValueAt(i, 4).toString());
+                }
             }
         } else {
             for (int k = 0; k < 366; k++) {
@@ -152,7 +163,12 @@ public class Actions {
 
                     if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                         MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
+                        if (MainFrame.jBirYilTButton.isSelected()) {
+                            jTable1.setValueAt(true, i, 6);
+                        } else {
+                            jTable1.setValueAt(false, i, 6);
+                            selected.remove(jTable1.getValueAt(i, 4).toString());
+                        }
                     }
                 }
             }
@@ -160,8 +176,8 @@ public class Actions {
     }
     
     public void altiAyFiltre(boolean filtcheck) {
-        if (filtcheck) {
-            MainFrame.selected.clear();
+        MainFrame.selected.clear();
+        if (filtcheck) {            
             try {
                 SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
                 Date now = new Date();
@@ -193,7 +209,12 @@ public class Actions {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
+                if (MainFrame.jAltiAyTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else {
+                    jTable1.setValueAt(false, i, 6);
+                    selected.remove(jTable1.getValueAt(i, 4).toString());
+                }
             }
         } else {
             for (int k = 0; k < 185; k++) {
@@ -205,7 +226,12 @@ public class Actions {
 
                     if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                         MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
+                        if (MainFrame.jAltiAyTButton.isSelected()) {
+                            jTable1.setValueAt(true, i, 6);
+                        } else {
+                            jTable1.setValueAt(false, i, 6);
+                            selected.remove(jTable1.getValueAt(i, 4).toString());
+                        }
                     }
                 }
             }
@@ -213,8 +239,8 @@ public class Actions {
     }
     
     public void birAyFiltre(boolean filtcheck) {
-        if (filtcheck) {
-            MainFrame.selected.clear();
+        MainFrame.selected.clear();
+        if (filtcheck) {            
             try {
                 SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
                 Date now = new Date();
@@ -246,7 +272,12 @@ public class Actions {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
+                if (MainFrame.jBirAyTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else {
+                    jTable1.setValueAt(false, i, 6);
+                    selected.remove(jTable1.getValueAt(i, 4).toString());
+                }
             }
         } else {
             for (int k = 0; k < 32; k++) {
@@ -258,7 +289,12 @@ public class Actions {
 
                     if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                         MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                        jTable1.setValueAt(true, i, 6);
+                        if (MainFrame.jBirAyTButton.isSelected()) {
+                            jTable1.setValueAt(true, i, 6);
+                        } else {
+                            jTable1.setValueAt(false, i, 6);
+                            selected.remove(jTable1.getValueAt(i, 4).toString());
+                        }
                     }
                 }
             }
@@ -293,14 +329,24 @@ public class Actions {
             sorter.setRowFilter(compoundRowFilter);
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
+                if (MainFrame.jDunTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else {
+                    jTable1.setValueAt(false, i, 6);
+                    selected.remove(jTable1.getValueAt(i, 4).toString());
+                }
             }
         } else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
+                //jTable1.setValueAt(false, i, 6);
                 if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
+                    if (MainFrame.jDunTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else {
+                        jTable1.setValueAt(false, i, 6);
+                        selected.remove(jTable1.getValueAt(i, 4).toString());
+                    }
                 }
             }
         }
@@ -334,15 +380,25 @@ public class Actions {
         if (filtcheck) {
             sorter.setRowFilter(compoundRowFilter);
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
+                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());                
+                if (jBugunTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else {
+                    jTable1.setValueAt(false, i, 6);
+                    selected.remove(jTable1.getValueAt(i, 4).toString());
+                }
             }
         } else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
+                //jTable1.setValueAt(false, i, 6);
                 if (jTable1.getModel().getValueAt(i, 2).equals(dateFormat.format(cal.getTime()))) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
+                     if (jBugunTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else {
+                        jTable1.setValueAt(false, i, 6);
+                        selected.remove(jTable1.getValueAt(i, 4).toString());
+                    }
                 }
             }
         }

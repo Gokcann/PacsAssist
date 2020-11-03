@@ -50,8 +50,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.RowFilter.ComparisonType;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -71,6 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
     StudyOpen studyOpen = new StudyOpen();
     URL url3 = MainFrame.class.getResource("/Logo.png");
     Actions actions = new Actions();
+
 
     /**
      * Creates new form MainFrame
@@ -125,9 +128,7 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
             System.out.println("//////////////////" + selected.size());
-
         }
-
     }
 
     /**
@@ -154,14 +155,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jFiltCheck = new javax.swing.JCheckBox();
-        jBugunButton = new javax.swing.JButton();
-        jDunButton = new javax.swing.JButton();
-        jBirAyButton = new javax.swing.JButton();
-        jAltiAyButton = new javax.swing.JButton();
-        jBirYılButton = new javax.swing.JButton();
-        jButunButton = new javax.swing.JButton();
         jModalityCombo = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        jBugunTButton = new ColorToggleButton();
+        jDunTButton = new ColorToggleButton();
+        jBirAyTButton = new ColorToggleButton();
+        jAltiAyTButton = new ColorToggleButton();
+        jBirYilTButton = new ColorToggleButton();
+        jHepsiTButton = new ColorToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PacsAssist");
@@ -202,7 +203,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jWebViewerButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jWebViewerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data-transfer.png"))); // NOI18N
+        jWebViewerButton.setText("WEB");
+        jWebViewerButton.setToolTipText("");
+        jWebViewerButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jWebViewerButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jWebViewerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWebViewerButtonActionPerformed(evt);
@@ -214,11 +220,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jWebViewerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(4, 4, 4)
+                .addComponent(jWebViewerButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jWeasisButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +267,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPatientName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPatientID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPatientID, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPatientSex)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -270,6 +276,8 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
+        Yenile.setText("Yenile");
+        Yenile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Yenile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YenileActionPerformed(evt);
@@ -283,14 +291,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,54 +315,6 @@ public class MainFrame extends javax.swing.JFrame {
         jFiltCheck.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFiltCheck.setText("Filtreleme");
 
-        jBugunButton.setText("Bugün");
-        jBugunButton.setMaximumSize(new java.awt.Dimension(75, 23));
-        jBugunButton.setMinimumSize(new java.awt.Dimension(75, 23));
-        jBugunButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBugunButtonActionPerformed(evt);
-            }
-        });
-
-        jDunButton.setText("Dün");
-        jDunButton.setMaximumSize(new java.awt.Dimension(75, 23));
-        jDunButton.setMinimumSize(new java.awt.Dimension(75, 23));
-        jDunButton.setPreferredSize(new java.awt.Dimension(51, 40));
-        jDunButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDunButtonActionPerformed(evt);
-            }
-        });
-
-        jBirAyButton.setText("Son 1 Ay");
-        jBirAyButton.setPreferredSize(new java.awt.Dimension(75, 40));
-        jBirAyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBirAyButtonActionPerformed(evt);
-            }
-        });
-
-        jAltiAyButton.setText("Son 6 Ay");
-        jAltiAyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAltiAyButtonActionPerformed(evt);
-            }
-        });
-
-        jBirYılButton.setText("Son 1 Yıl");
-        jBirYılButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBirYılButtonActionPerformed(evt);
-            }
-        });
-
-        jButunButton.setText("Bütün Tarihler");
-        jButunButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButunButtonActionPerformed(evt);
-            }
-        });
-
         jModalityCombo.setFont(new java.awt.Font("Times New Roman", 0, 28)); // NOI18N
         jModalityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC", "CR", "KO", "IO" }));
         jModalityCombo.setToolTipText("");
@@ -364,6 +326,48 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Modality Filtresi");
 
+        jBugunTButton.setText("Bugün");
+        jBugunTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBugunTButtonActionPerformed(evt);
+            }
+        });
+
+        jDunTButton.setText("Dün");
+        jDunTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDunTButtonActionPerformed(evt);
+            }
+        });
+
+        jBirAyTButton.setText("Son 1 Ay");
+        jBirAyTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBirAyTButtonActionPerformed(evt);
+            }
+        });
+
+        jAltiAyTButton.setText("Son 6 Ay");
+        jAltiAyTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAltiAyTButtonActionPerformed(evt);
+            }
+        });
+
+        jBirYilTButton.setText("Son 1 Yıl");
+        jBirYilTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBirYilTButtonActionPerformed(evt);
+            }
+        });
+
+        jHepsiTButton.setText("Hepsini Seç");
+        jHepsiTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHepsiTButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -371,21 +375,21 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDunButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jFiltCheck, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBirAyButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                    .addComponent(jBugunTButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDunTButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBirAyTButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBirYılButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBirYilTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jHepsiTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jAltiAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jAltiAyTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jModalityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jModalityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,21 +399,19 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jFiltCheck)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jModalityCombo)
-                    .addComponent(jBugunButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jAltiAyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jDunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBirYılButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jAltiAyTButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jModalityCombo, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBugunTButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBirAyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButunButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addComponent(jDunTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBirYilTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jHepsiTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBirAyTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -419,7 +421,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -427,8 +429,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 5, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,7 +443,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -463,7 +466,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_YenileActionPerformed
 
     private void jWebViewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWebViewerButtonActionPerformed
-        actions.openWeb(argIP,webPort,patientId);
+        actions.openWeb(argIP, webPort, patientId);
     }//GEN-LAST:event_jWebViewerButtonActionPerformed
 
     private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
@@ -476,41 +479,33 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jWeasisButtonActionPerformed
 
     private void jModalityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModalityComboActionPerformed
-
         String queryMod = jModalityCombo.getSelectedItem().toString();
-        actions.selectedComboBox(queryMod,jFiltCheck.isSelected());
-       
+        actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
     }//GEN-LAST:event_jModalityComboActionPerformed
 
-    private void jButunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButunButtonActionPerformed
-
-        actions.tumZamanlarFiltre();
-        
-    }//GEN-LAST:event_jButunButtonActionPerformed
-
-    private void jBirYılButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYılButtonActionPerformed
-
-        actions.birYilFiltre(jFiltCheck.isSelected());
-        
-    }//GEN-LAST:event_jBirYılButtonActionPerformed
-
-    private void jAltiAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyButtonActionPerformed
-        actions.altiAyFiltre(jFiltCheck.isSelected());
-    }//GEN-LAST:event_jAltiAyButtonActionPerformed
-
-    private void jBirAyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyButtonActionPerformed
-        actions.birAyFiltre(jFiltCheck.isSelected());
-    }//GEN-LAST:event_jBirAyButtonActionPerformed
-
-    private void jDunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunButtonActionPerformed
-        // TODO add your handling code here:
-        actions.dunFiltre(jFiltCheck.isSelected());
-    }//GEN-LAST:event_jDunButtonActionPerformed
-
-    private void jBugunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunButtonActionPerformed
+    private void jBugunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunTButtonActionPerformed
         actions.bugunFiltre(jFiltCheck.isSelected());
-        
-    }//GEN-LAST:event_jBugunButtonActionPerformed
+    }//GEN-LAST:event_jBugunTButtonActionPerformed
+
+    private void jDunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunTButtonActionPerformed
+        actions.dunFiltre(jFiltCheck.isSelected());
+    }//GEN-LAST:event_jDunTButtonActionPerformed
+
+    private void jBirAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyTButtonActionPerformed
+        actions.birAyFiltre(jFiltCheck.isSelected());
+    }//GEN-LAST:event_jBirAyTButtonActionPerformed
+
+    private void jAltiAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyTButtonActionPerformed
+        actions.altiAyFiltre(jFiltCheck.isSelected());
+    }//GEN-LAST:event_jAltiAyTButtonActionPerformed
+
+    private void jBirYilTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYilTButtonActionPerformed
+        actions.birYilFiltre(jFiltCheck.isSelected());
+    }//GEN-LAST:event_jBirYilTButtonActionPerformed
+
+    private void jHepsiTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHepsiTButtonActionPerformed
+        actions.tumZamanlarFiltre();
+    }//GEN-LAST:event_jHepsiTButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
@@ -656,14 +651,23 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {     // to detect doble click events
-/*
+
+                    row[0] = jTable1.getSelectedRow();
+                    selected.add(jTable1.getValueAt(row[0], 4).toString());
+                    if (jTable1.getValueAt(row[0], 6).equals(false)) {
+                        jTable1.setValueAt(true, row[0], 6);
+                    } else {
+                        jTable1.setValueAt(false, row[0], 6);
+                    }
+                    /*
                     row[0] = jTable1.getSelectedRow(); // select a row
                     String id = jTable1.getValueAt(row[0], 4).toString();
                     studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, id));
                      */
                 }
             }
-        });
+        }
+        );
     }
 
     public static String[][] baslangic() throws IOException {
@@ -771,13 +775,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Yenile;
-    private javax.swing.JButton jAltiAyButton;
-    private javax.swing.JButton jBirAyButton;
-    private javax.swing.JButton jBirYılButton;
-    private javax.swing.JButton jBugunButton;
-    private javax.swing.JButton jButunButton;
-    private javax.swing.JButton jDunButton;
-    private javax.swing.JCheckBox jFiltCheck;
+    public static javax.swing.JToggleButton jAltiAyTButton;
+    public static javax.swing.JToggleButton jBirAyTButton;
+    public static javax.swing.JToggleButton jBirYilTButton;
+    public static javax.swing.JToggleButton jBugunTButton;
+    public static javax.swing.JToggleButton jDunTButton;
+    public static javax.swing.JCheckBox jFiltCheck;
+    public static javax.swing.JToggleButton jHepsiTButton;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox<String> jModalityCombo;
