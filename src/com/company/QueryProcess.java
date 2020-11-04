@@ -1,21 +1,15 @@
 package com.company;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-
-import com.company.*;
 
 public class QueryProcess {
 
-    private  static HttpURLConnection connection;
+    private static HttpURLConnection connection;
 
     public StringBuffer QueryProcessMethod(String urlArgs, String patientArgs) {
 
@@ -23,7 +17,7 @@ public class QueryProcess {
         BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
-        
+
         try {
             //URL url = new URL("http://192.168.12.44:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies");
             String myURL = urlArgs + "rs/studies?PatientID=" + patientArgs;
@@ -42,13 +36,13 @@ public class QueryProcess {
 
             if (status > 299) {
                 reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                while (( line = reader.readLine()) != null ) {
+                while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
                 }
                 reader.close();
-            }else {
+            } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                while (( line = reader.readLine()) != null ) {
+                while ((line = reader.readLine()) != null) {
                     responseContent.append(line);
                 }
                 reader.close();
@@ -60,8 +54,7 @@ public class QueryProcess {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
 
             connection.disconnect();
         }
@@ -81,7 +74,5 @@ public class QueryProcess {
                 .join();
 
          */
-
     }
 }
-

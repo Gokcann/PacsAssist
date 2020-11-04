@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.company;
-
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,7 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class GetThumb {
@@ -24,14 +17,14 @@ public class GetThumb {
         //obj nin 12. elemani study instance uid
         String s = data[index][12];
         //study instance uidye gore thumbnail goruntulerini veren linki olusturmak icin createurl metonuda gonderiyoruz
-        URL url = new URL(urlCreator.CreateURL(urlArgs , s));
+        URL url = new URL(urlCreator.CreateURL(urlArgs, s));
         //gelen url e get metoduyla baglanip gorseli okuyup bufferlıyoruz
         HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
         urlConnect.setRequestMethod("GET");
         urlConnect.setDoOutput(true);
         urlConnect.setReadTimeout(5000);
 
-            /*burasi daha hizli bir serverda kullanilabilir
+        /*burasi daha hizli bir serverda kullanilabilir
             try(InputStream inputStream = urlConnect.getInputStream()) {
 
                 BufferedImage img = ImageIO.read(urlConnect.getInputStream());
@@ -41,12 +34,11 @@ public class GetThumb {
             catch (Exception ex) {
                 System.out.println(ex);
             }
-             */
-
+         */
         //TODO try catch blogu eklenecek image io icin
         while (urlConnect.getResponseCode() != HttpURLConnection.HTTP_INTERNAL_ERROR) {
             BufferedImage img = ImageIO.read(urlConnect.getInputStream());
-            if(img != null){
+            if (img != null) {
                 icon = new ImageIcon(resize(img));
             }
             break;

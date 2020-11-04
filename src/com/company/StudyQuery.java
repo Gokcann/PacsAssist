@@ -36,12 +36,12 @@ public class StudyQuery {
                 tmp.setStudyDateV2(obj.getJSONObject(_tmp.getStudyDateT0())
                         .getJSONArray(_tmp.getStudyDateT2()).getString(0));
             }
-/*
+            /*
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getAccessionNumberT0()).has(_tmp.getAccessionNumberT2())) {
                 tmp.setAccessionNumberV2(obj.getJSONObject(_tmp.getAccessionNumberT0())
                         .getJSONArray(_tmp.getAccessionNumberT2()).getString(0));
             }
-*/
+             */
             if (myArray.getJSONObject(i).has(_tmp.getReferringPhysiciansNameT0()) && myArray.getJSONObject(i).getJSONObject(_tmp.getReferringPhysiciansNameT0()).has(_tmp.getReferringPhysiciansNameT2()) && myArray.getJSONObject(i).getJSONObject(_tmp.getReferringPhysiciansNameT0()).getJSONArray(_tmp.getReferringPhysiciansNameT2()).getJSONObject(0).has(_tmp.getReferringPhysiciansNameT3())) {
                 tmp.setReferringPhysiciansNameV2(obj.getJSONObject(_tmp.getReferringPhysiciansNameT0())
                         .getJSONArray(_tmp.getReferringPhysiciansNameT2()).getJSONObject(0)
@@ -88,7 +88,7 @@ public class StudyQuery {
                 tmp.setPatientsIDV2(obj.getJSONObject(_tmp.getPatientsIDT0())
                         .getJSONArray(_tmp.getPatientsIDT2()).getString(0));
             }
-            
+
             try {
                 if (myArray.getJSONObject(i).getJSONObject(_tmp.getPatientsBirthDateT0()).has(_tmp.getPatientsBirthDateT2())) {
                     tmp.setPatientsBirthDateV2(obj.getJSONObject(_tmp.getPatientsBirthDateT0())
@@ -96,7 +96,7 @@ public class StudyQuery {
                 }
             } catch (Exception e) {
             }
-            
+
             if (myArray.getJSONObject(i).getJSONObject(_tmp.getPatientsSexT0()).has(_tmp.getPatientsSexT2())) {
                 tmp.setPatientsSexV2(obj.getJSONObject(_tmp.getPatientsSexT0())
                         .getJSONArray(_tmp.getPatientsSexT2()).getString(0));

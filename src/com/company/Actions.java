@@ -1,24 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.company;
 
-import static com.company.MainFrame.jBugunTButton;
 import static com.company.MainFrame.jTable1;
 import static com.company.MainFrame.selected;
 import java.awt.Desktop;
 import java.net.URI;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.DefaultTableModel;
@@ -41,95 +29,7 @@ public class Actions {
         }
     }
 
-    public void selectedComboBox(String queryMod, boolean filtCheck) {
-        MainFrame.selected.clear();
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
-        //String queryMod = jModalityCombo.getSelectedItem().toString();
-
-        RowFilter<DefaultTableModel, Object> firstFiler = null;
-
-        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
-        try {
-            firstFiler = RowFilter.regexFilter(queryMod, 1);
-
-            filters.add(firstFiler);
-
-            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-        if (filtCheck) {
-            sorter.setRowFilter(compoundRowFilter);
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                jTable1.setValueAt(true, i, 6);
-            }
-        } /* else if (MainFrame.jBirYilTButton.isSelected()) {
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-            birYilFiltre(filtCheck,false);
-        } else if (MainFrame.jAltiAyTButton.isSelected()) {
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-            altiAyFiltre(filtCheck,false);
-        }else if (MainFrame.jBirAyTButton.isSelected()) {
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-            birAyFiltre(filtCheck,false);
-        }else if (MainFrame.jDunTButton.isSelected()) {
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-            dunFiltre(filtCheck);
-        }else if (MainFrame.jBugunTButton.isSelected()) {
-
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if (jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-            bugunFiltre(filtCheck);
-        } */ else {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                jTable1.setValueAt(false, i, 6);
-                if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                }
-            }
-        }
-    }
-
-    public void filtre(boolean filtcheck, Date month321) {
+    public void filtre(boolean filtcheck, Date sontarih, String queryMod) {
         MainFrame.selected.clear();
         Date now = new Date();
 
@@ -137,8 +37,9 @@ public class Actions {
             DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
             TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
             jTable1.setRowSorter(sorter);
-            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
-            filters.add(RowFilter.dateFilter(ComparisonType.AFTER, month321));
+            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>();
+            filters.add(RowFilter.regexFilter(queryMod, 1));
+            filters.add(RowFilter.dateFilter(ComparisonType.AFTER, sontarih));
             filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now));
             RowFilter<DefaultTableModel, Object> rf = null;
             rf = RowFilter.andFilter(filters);
@@ -158,6 +59,9 @@ public class Actions {
                     jTable1.setValueAt(true, i, 6);
                 } else if (MainFrame.jHepsiTButton.isSelected()) {
                     jTable1.setValueAt(true, i, 6);
+                } else if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
                 } else {
                     jTable1.setValueAt(false, i, 6);
                     selected.remove(jTable1.getValueAt(i, 4).toString());
@@ -167,7 +71,7 @@ public class Actions {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 Date abv = (Date) jTable1.getValueAt(i, 5);
                 jTable1.setValueAt(false, i, 6);
-                if (abv.after(month321) && abv.before(now)) {
+                if (abv.after(sontarih) && abv.before(now)) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                     if (MainFrame.jBugunTButton.isSelected()) {
                         jTable1.setValueAt(true, i, 6);
@@ -181,6 +85,9 @@ public class Actions {
                         jTable1.setValueAt(true, i, 6);
                     } else if (MainFrame.jHepsiTButton.isSelected()) {
                         jTable1.setValueAt(true, i, 6);
+                    } else if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                        MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                        jTable1.setValueAt(true, i, 6);
                     } else {
                         jTable1.setValueAt(false, i, 6);
                         selected.remove(jTable1.getValueAt(i, 4).toString());
@@ -190,6 +97,44 @@ public class Actions {
         }
     }
 }
+
+/*
+    public void selectedComboBox(String queryMod, boolean filtCheck) {
+        MainFrame.selected.clear();
+        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+        jTable1.setRowSorter(sorter);
+        //String queryMod = jModalityCombo.getSelectedItem().toString();
+        RowFilter<DefaultTableModel, Object> firstFiler = null;
+        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
+        try {
+            firstFiler = RowFilter.regexFilter(queryMod, 1);
+
+            filters.add(firstFiler);
+
+            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        if (filtCheck) {
+            sorter.setRowFilter(compoundRowFilter);
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            }
+        } else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                jTable1.setValueAt(false, i, 6);
+                if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    jTable1.setValueAt(true, i, 6);
+                }
+            }
+        }
+    }
+*/
 
 /*public void birYilFiltre(boolean filtcheck,boolean  select) {
         String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();

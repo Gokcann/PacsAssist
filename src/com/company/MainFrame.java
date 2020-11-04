@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.company;
 
-//import static com.company.JTableExamples.resize;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -24,13 +15,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -405,7 +392,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jModalityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModalityComboActionPerformed
         String queryMod = jModalityCombo.getSelectedItem().toString();
-        actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -10);
+        Date sontarih = cal.getTime();
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jModalityComboActionPerformed
 
     private void jBugunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunTButtonActionPerformed
@@ -416,9 +406,10 @@ public class MainFrame extends javax.swing.JFrame {
         jDunTButton.setSelected(false);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
-        Date month321 = cal.getTime();
+        Date sontarih = cal.getTime();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
-        actions.filtre(jFiltCheck.isSelected(), month321);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jBugunTButtonActionPerformed
 
     private void jDunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunTButtonActionPerformed
@@ -429,9 +420,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBugunTButton.setSelected(false);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -2);
-        Date month321 = cal.getTime();
+        Date sontarih = cal.getTime();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
-        actions.filtre(jFiltCheck.isSelected(), month321);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jDunTButtonActionPerformed
 
     private void jBirAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyTButtonActionPerformed
@@ -443,9 +435,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBugunTButton.setSelected(false);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -1);
-        Date month321 = cal.getTime();
+        Date sontarih = cal.getTime();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
-        actions.filtre(jFiltCheck.isSelected(), month321);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jBirAyTButtonActionPerformed
 
     private void jAltiAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyTButtonActionPerformed
@@ -457,9 +450,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBugunTButton.setSelected(false);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -6);
-        Date month321 = cal.getTime();
+        Date sontarih = cal.getTime();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
-        actions.filtre(jFiltCheck.isSelected(), month321);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jAltiAyTButtonActionPerformed
 
     private void jBirYilTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYilTButtonActionPerformed
@@ -471,9 +465,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBugunTButton.setSelected(false);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -12);
-        Date month321 = cal.getTime();
+        Date sontarih = cal.getTime();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
-        actions.filtre(jFiltCheck.isSelected(), month321);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jBirYilTButtonActionPerformed
 
     private void jHepsiTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHepsiTButtonActionPerformed
@@ -485,9 +480,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBugunTButton.setSelected(false);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -20);
-        Date month321 = cal.getTime();
+        Date sontarih = cal.getTime();
+        String queryMod = jModalityCombo.getSelectedItem().toString();
 
-        actions.filtre(jFiltCheck.isSelected(), month321);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jHepsiTButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
