@@ -62,7 +62,7 @@ public class Actions {
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
-        if (filtCheck) {            
+        if (filtCheck) {
             sorter.setRowFilter(compoundRowFilter);
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
@@ -121,13 +121,13 @@ public class Actions {
         } */ else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
-                if ( (!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                     jTable1.setValueAt(true, i, 6);
                 }
             }
         }
-    }  
+    }
 
     public void filtre(boolean filtcheck, Date month321) {
         MainFrame.selected.clear();
@@ -166,6 +166,7 @@ public class Actions {
         } else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 Date abv = (Date) jTable1.getValueAt(i, 5);
+                jTable1.setValueAt(false, i, 6);
                 if (abv.after(month321) && abv.before(now)) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                     if (MainFrame.jBugunTButton.isSelected()) {
@@ -492,4 +493,4 @@ public class Actions {
             }
         }
     }
-*/
+ */
