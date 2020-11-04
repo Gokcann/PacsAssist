@@ -68,7 +68,7 @@ public class Actions {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                 jTable1.setValueAt(true, i, 6);
             }
-        } else if (MainFrame.jBirYilTButton.isSelected()) {
+        } /* else if (MainFrame.jBirYilTButton.isSelected()) {
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
@@ -118,7 +118,7 @@ public class Actions {
                 }
             }
             bugunFiltre(filtCheck);
-        }else {
+        } */ else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
                 jTable1.setValueAt(false, i, 6);
                 if ( (!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
@@ -127,42 +127,71 @@ public class Actions {
                 }
             }
         }
-    }//
+    }  
 
-    public void tumZamanlarFiltre() {
+    public void filtre(boolean filtcheck, Date month321) {
         MainFrame.selected.clear();
+        Date now = new Date();
+        Date abv = new Date();
 
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
+        if (filtcheck) {
+            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+            jTable1.setRowSorter(sorter);
+            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(5);
+            filters.add(RowFilter.dateFilter(ComparisonType.AFTER, month321));
+            filters.add(RowFilter.dateFilter(ComparisonType.BEFORE, now));
+            RowFilter<DefaultTableModel, Object> rf = null;
+            rf = RowFilter.andFilter(filters);
+            sorter.setRowFilter(rf);
 
-        RowFilter<DefaultTableModel, Object> firstFiler = null;
-
-        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-        RowFilter<DefaultTableModel, Object> compoundRowFilter = null;
-        try {
-            firstFiler = RowFilter.regexFilter("", 2);
-
-            filters.add(firstFiler);
-
-            compoundRowFilter = RowFilter.andFilter(filters); // you may also choose the OR filter
-        } catch (java.util.regex.PatternSyntaxException e) {
-            return;
-        }
-        sorter.setRowFilter(compoundRowFilter);
-
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-            if (MainFrame.jHepsiTButton.isSelected()) {
-                jTable1.setValueAt(true, i, 6);
-            } else {
-                jTable1.setValueAt(false, i, 6);
-                selected.clear();
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                if (MainFrame.jBugunTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else if (MainFrame.jDunTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else if (MainFrame.jBirAyTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else if (MainFrame.jAltiAyTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else if (MainFrame.jBirYilTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else if (MainFrame.jHepsiTButton.isSelected()) {
+                    jTable1.setValueAt(true, i, 6);
+                } else {
+                    jTable1.setValueAt(false, i, 6);
+                    selected.remove(jTable1.getValueAt(i, 4).toString());
+                }
+            }
+        } else {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                abv = (Date) jTable1.getValueAt(i, 5);
+                if (abv.after(month321) && abv.before(now)) {
+                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                    if (MainFrame.jBugunTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else if (MainFrame.jDunTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else if (MainFrame.jBirAyTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else if (MainFrame.jAltiAyTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else if (MainFrame.jBirYilTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else if (MainFrame.jHepsiTButton.isSelected()) {
+                        jTable1.setValueAt(true, i, 6);
+                    } else {
+                        jTable1.setValueAt(false, i, 6);
+                        selected.remove(jTable1.getValueAt(i, 4).toString());
+                    }
+                }
             }
         }
     }
+}
 
-    public void birYilFiltre(boolean filtcheck,boolean  select) {
+/*public void birYilFiltre(boolean filtcheck,boolean  select) {
         String queryMod = MainFrame.jModalityCombo.getSelectedItem().toString();
         
         if(select){  
@@ -464,5 +493,4 @@ public class Actions {
             }
         }
     }
-
-}
+*/

@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,7 +28,9 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -51,7 +54,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-    }   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -406,66 +409,85 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jModalityComboActionPerformed
 
     private void jBugunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunTButtonActionPerformed
-        actions.bugunFiltre(jFiltCheck.isSelected());
+        jHepsiTButton.setSelected(false);
+        jAltiAyTButton.setSelected(false);
+        jBirYilTButton.setSelected(false);
+        jBirAyTButton.setSelected(false);
+        jDunTButton.setSelected(false);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        Date month321 = cal.getTime();
+
+        actions.filtre(jFiltCheck.isSelected(), month321);
     }//GEN-LAST:event_jBugunTButtonActionPerformed
 
     private void jDunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDunTButtonActionPerformed
-        actions.dunFiltre(jFiltCheck.isSelected());        
+        jHepsiTButton.setSelected(false);
+        jAltiAyTButton.setSelected(false);
+        jBirYilTButton.setSelected(false);
+        jBirAyTButton.setSelected(false);
+        jBugunTButton.setSelected(false);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -2);
+        Date month321 = cal.getTime();
+
+        actions.filtre(jFiltCheck.isSelected(), month321);
     }//GEN-LAST:event_jDunTButtonActionPerformed
 
     private void jBirAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirAyTButtonActionPerformed
-        actions.birAyFiltre(jFiltCheck.isSelected(),true);
-        
+
         jHepsiTButton.setSelected(false);
         jAltiAyTButton.setSelected(false);
         jBirYilTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        if(!jBirAyTButton.isSelected()) {
-            String queryMod = jModalityCombo.getSelectedItem().toString();
-            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
-        }
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date month321 = cal.getTime();
+
+        actions.filtre(jFiltCheck.isSelected(), month321);
     }//GEN-LAST:event_jBirAyTButtonActionPerformed
 
     private void jAltiAyTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltiAyTButtonActionPerformed
-        actions.altiAyFiltre(jFiltCheck.isSelected(),true);
-        
+
         jHepsiTButton.setSelected(false);
         jBirYilTButton.setSelected(false);
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        if(!jAltiAyTButton.isSelected()) {
-            String queryMod = jModalityCombo.getSelectedItem().toString();
-            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
-        }
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -6);
+        Date month321 = cal.getTime();
+
+        actions.filtre(jFiltCheck.isSelected(), month321);
     }//GEN-LAST:event_jAltiAyTButtonActionPerformed
 
     private void jBirYilTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBirYilTButtonActionPerformed
-        actions.birYilFiltre(jFiltCheck.isSelected(),true);
-        
+
         jHepsiTButton.setSelected(false);
         jAltiAyTButton.setSelected(false);
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        if(!jBirYilTButton.isSelected()) {
-            String queryMod = jModalityCombo.getSelectedItem().toString();
-            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
-        }
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -12);
+        Date month321 = cal.getTime();
+
+        actions.filtre(jFiltCheck.isSelected(), month321);
     }//GEN-LAST:event_jBirYilTButtonActionPerformed
 
     private void jHepsiTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHepsiTButtonActionPerformed
-        actions.tumZamanlarFiltre();
+
         jBirYilTButton.setSelected(false);
         jAltiAyTButton.setSelected(false);
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        if(!jHepsiTButton.isSelected()) {
-            String queryMod = jModalityCombo.getSelectedItem().toString();
-            actions.selectedComboBox(queryMod, jFiltCheck.isSelected());
-        }
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -20);
+        Date month321 = cal.getTime();
+
+        actions.filtre(jFiltCheck.isSelected(), month321);
     }//GEN-LAST:event_jHepsiTButtonActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
