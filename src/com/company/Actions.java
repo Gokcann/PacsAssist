@@ -32,7 +32,7 @@ public class Actions {
     public void filtre(boolean filtcheck, Date sontarih, String queryMod) {
         MainFrame.selected.clear();
         Date now = new Date();
-/*
+        /*
         if (filtcheck) {
             DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
             TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
@@ -96,18 +96,24 @@ public class Actions {
             }
         }
         if (filtcheck) {
-        DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
-        jTable1.setRowSorter(sorter);
-        Boolean a = true;
-        List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(6);
-        filters.add(RowFilter.regexFilter(a.toString(), 6));        
-        RowFilter<DefaultTableModel, Object> rf = null;
-        rf = RowFilter.andFilter(filters);
-        sorter.setRowFilter(rf);
+            DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
+            jTable1.setRowSorter(sorter);
+            Boolean a = true;
+            Boolean b = false;
+            List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>();
+            if (MainFrame.jBugunTButton.isSelected() || MainFrame.jDunTButton.isSelected() || MainFrame.jBirAyTButton.isSelected() || MainFrame.jAltiAyTButton.isSelected() || MainFrame.jBirYilTButton.isSelected() || MainFrame.jHepsiTButton.isSelected()) {
+                filters.add(RowFilter.regexFilter(a.toString(), 6));
+            } else {
+                filters.add(RowFilter.regexFilter(b.toString(), 6));
+            }
+            RowFilter<DefaultTableModel, Object> rf = null;
+            rf = RowFilter.andFilter(filters);
+            sorter.setRowFilter(rf);
         }
     }
 }
+
 
 /*
     public void selectedComboBox(String queryMod, boolean filtCheck) {

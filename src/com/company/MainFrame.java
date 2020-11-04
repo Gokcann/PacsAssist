@@ -2,6 +2,8 @@ package com.company;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -395,7 +397,14 @@ public class MainFrame extends javax.swing.JFrame {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -10);
         Date sontarih = cal.getTime();
-        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);        
+        
+        /* jModalityCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
+            }
+        } ); */
     }//GEN-LAST:event_jModalityComboActionPerformed
 
     private void jBugunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunTButtonActionPerformed
@@ -489,7 +498,7 @@ public class MainFrame extends javax.swing.JFrame {
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
-
+        
         GetThumb getThumb = new GetThumb();
 
         for (int i = 0; i < obj.length; i++) {
@@ -625,6 +634,7 @@ public class MainFrame extends javax.swing.JFrame {
         final int[] column = new int[1];
         final String[] commandString = new String[1];
         final Process[] process = new Process[1];
+      
 
         //sadece tabloyu dinleyen click listener metodu
         jTable1.addMouseListener(new MouseAdapter() {
