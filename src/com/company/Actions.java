@@ -132,7 +132,6 @@ public class Actions {
     public void filtre(boolean filtcheck, Date month321) {
         MainFrame.selected.clear();
         Date now = new Date();
-        Date abv = new Date();
 
         if (filtcheck) {
             DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
@@ -166,7 +165,7 @@ public class Actions {
             }
         } else {
             for (int i = 0; i < jTable1.getRowCount(); i++) {
-                abv = (Date) jTable1.getValueAt(i, 5);
+                Date abv = (Date) jTable1.getValueAt(i, 5);
                 if (abv.after(month321) && abv.before(now)) {
                     MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
                     if (MainFrame.jBugunTButton.isSelected()) {
