@@ -89,13 +89,14 @@ public class Actions {
                     jTable1.setValueAt(true, i, 6);
                 } else if (MainFrame.jHepsiTButton.isSelected()) {
                     jTable1.setValueAt(true, i, 6);
-                }else if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                jTable1.setValueAt(true, i, 6);
-            }
+                }
                 else {
                     jTable1.setValueAt(false, i, 6);
                     selected.remove(jTable1.getValueAt(i, 4).toString());
                 }
+            }
+            if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
+                jTable1.setValueAt(true, i, 6);
             }
 
         }
