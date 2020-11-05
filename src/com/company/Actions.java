@@ -28,7 +28,7 @@ public class Actions {
         }
     }
 
-    public void filtre(boolean filtcheck, Date sontarih, String queryMod, boolean toggleSelected) {
+    public void filtre(boolean filtcheck, Date sontarih, String queryMod) {
         MainFrame.selected.clear();
         jTable1.setRowSorter(null);
         Date now = new Date();
