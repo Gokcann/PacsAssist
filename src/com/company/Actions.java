@@ -30,6 +30,7 @@ public class Actions {
 
     public void filtre(boolean filtcheck, Date sontarih, String queryMod, boolean toggleSelected) {
         MainFrame.selected.clear();
+        jTable1.setRowSorter(null);
         Date now = new Date();
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             jTable1.setValueAt(false, i, 6);

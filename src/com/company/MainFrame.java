@@ -231,6 +231,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jFiltCheck.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFiltCheck.setText("Filtreleme");
+        jFiltCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFiltCheckActionPerformed(evt);
+            }
+        });
 
         jModalityCombo.setFont(new java.awt.Font("Times New Roman", 0, 28)); // NOI18N
         jModalityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC", "CR", "KO", "IO" }));
@@ -369,7 +374,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void YenileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YenileActionPerformed
-        String[][] result3 = null;
+/*        String[][] result3 = null;
         try {
             result3 = baslangic();
         } catch (IOException ex) {
@@ -380,6 +385,11 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
+for (int i = 0 ; i < selected.size();i++) {
+    System.out.println(selected.get(i));
+}
+        
     }//GEN-LAST:event_YenileActionPerformed
 
     private void jWebViewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWebViewerButtonActionPerformed
@@ -510,6 +520,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jHepsiTButtonActionPerformed
+
+    private void jFiltCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFiltCheckActionPerformed
+        // TODO add your handling code here:
+        
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
+    }//GEN-LAST:event_jFiltCheckActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
