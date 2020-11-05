@@ -404,15 +404,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void jModalityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModalityComboActionPerformed
+        queryMod = jModalityCombo.getSelectedItem().toString();
         if (toggleSelected()) {
-            String queryMod = jModalityCombo.getSelectedItem().toString();
             actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
         }
         else {
             cal = Calendar.getInstance();
             cal.add(Calendar.YEAR, -10);
             sontarih = cal.getTime();
-            String queryMod = jModalityCombo.getSelectedItem().toString();
             actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected()); 
         }
 
@@ -430,10 +429,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirYilTButton.setSelected(false);
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
-        Date sontarih = cal.getTime();
-        String queryMod = jModalityCombo.getSelectedItem().toString();
+        sontarih = cal.getTime();
+        queryMod = jModalityCombo.getSelectedItem().toString();
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jBugunTButtonActionPerformed
@@ -444,10 +443,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirYilTButton.setSelected(false);
         jBirAyTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -2);
-        Date sontarih = cal.getTime();
-        String queryMod = jModalityCombo.getSelectedItem().toString();
+        sontarih = cal.getTime();
+        queryMod = jModalityCombo.getSelectedItem().toString();
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jDunTButtonActionPerformed
@@ -459,10 +458,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirYilTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -1);
-        Date sontarih = cal.getTime();
-        String queryMod = jModalityCombo.getSelectedItem().toString();
+        sontarih = cal.getTime();
+        queryMod = jModalityCombo.getSelectedItem().toString();
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jBirAyTButtonActionPerformed
@@ -474,10 +473,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -6);
-        Date sontarih = cal.getTime();
-        String queryMod = jModalityCombo.getSelectedItem().toString();
+        sontarih = cal.getTime();
+        queryMod = jModalityCombo.getSelectedItem().toString();
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jAltiAyTButtonActionPerformed
@@ -489,10 +488,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -12);
-        Date sontarih = cal.getTime();
-        String queryMod = jModalityCombo.getSelectedItem().toString();
+        sontarih = cal.getTime();
+        queryMod = jModalityCombo.getSelectedItem().toString();
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jBirYilTButtonActionPerformed
@@ -504,10 +503,10 @@ public class MainFrame extends javax.swing.JFrame {
         jBirAyTButton.setSelected(false);
         jDunTButton.setSelected(false);
         jBugunTButton.setSelected(false);
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -20);
-        Date sontarih = cal.getTime();
-        String queryMod = jModalityCombo.getSelectedItem().toString();
+        sontarih = cal.getTime();
+        queryMod = jModalityCombo.getSelectedItem().toString();
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jHepsiTButtonActionPerformed
