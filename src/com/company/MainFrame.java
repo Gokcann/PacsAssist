@@ -523,8 +523,13 @@ for (int i = 0 ; i < selected.size();i++) {
 
     private void jFiltCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFiltCheckActionPerformed
         // TODO add your handling code here:
+        try {
+            actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
+        }
+        catch(Exception e) {
+            
+        }
         
-        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod, toggleSelected());
     }//GEN-LAST:event_jFiltCheckActionPerformed
 
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
