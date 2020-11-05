@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.RowFilter;
-import javax.swing.RowFilter.ComparisonType;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -70,42 +69,34 @@ public class Actions {
             //sorter.setRowFilter(null);
         } else { */
         for (int i = 0; i < jTable1.getRowCount(); i++) {
+            jTable1.setValueAt(false, i, 6);
             Date abv = (Date) jTable1.getValueAt(i, 5);
             jTable1.setValueAt(false, i, 6);
-            if (abv.after(sontarih) && abv.before(now)) {
+            if (abv.after(sontarih) && abv.before(now) && (queryMod.equals(""))) {
                 MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                if (MainFrame.jBugunTButton.isSelected()) {
+                if (MainFrame.jBugunTButton.isSelected() || MainFrame.jDunTButton.isSelected() || MainFrame.jBirAyTButton.isSelected() || MainFrame.jAltiAyTButton.isSelected() || MainFrame.jBirYilTButton.isSelected() || MainFrame.jHepsiTButton.isSelected()) {
                     jTable1.setValueAt(true, i, 6);
-                } else if (MainFrame.jDunTButton.isSelected()) {
-                    jTable1.setValueAt(true, i, 6);
-                } else if (MainFrame.jBirAyTButton.isSelected()) {
-                    jTable1.setValueAt(true, i, 6);
-                } else if (MainFrame.jAltiAyTButton.isSelected()) {
-                    jTable1.setValueAt(true, i, 6);
-                } else if (MainFrame.jBirYilTButton.isSelected()) {
-                    jTable1.setValueAt(true, i, 6);
-                } else if (MainFrame.jHepsiTButton.isSelected()) {
-                    jTable1.setValueAt(true, i, 6);
-                } else if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) {
-                    MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
-                    jTable1.setValueAt(true, i, 6);
-                } else {
-                    jTable1.setValueAt(false, i, 6);
-                    selected.remove(jTable1.getValueAt(i, 4).toString());
                 }
+            } else if ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod) && !(MainFrame.jBugunTButton.isSelected() || MainFrame.jDunTButton.isSelected() || MainFrame.jBirAyTButton.isSelected() || MainFrame.jAltiAyTButton.isSelected() || MainFrame.jBirYilTButton.isSelected() || MainFrame.jHepsiTButton.isSelected())) {
+                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            } else if ((abv.after(sontarih) && abv.before(now)) && ((!queryMod.equals("")) && jTable1.getModel().getValueAt(i, 1).toString().contains(queryMod)) && (MainFrame.jBugunTButton.isSelected() || MainFrame.jDunTButton.isSelected() || MainFrame.jBirAyTButton.isSelected() || MainFrame.jAltiAyTButton.isSelected() || MainFrame.jBirYilTButton.isSelected() || MainFrame.jHepsiTButton.isSelected())) {
+                MainFrame.selected.add(jTable1.getValueAt(i, 4).toString());
+                jTable1.setValueAt(true, i, 6);
+            } else {
+                jTable1.setValueAt(false, i, 6);
+                selected.remove(jTable1.getValueAt(i, 4).toString());
             }
         }
         if (filtcheck) {
             DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
             TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(table);
             jTable1.setRowSorter(sorter);
-            Boolean a = true;
-            Boolean b = false;
             List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>();
-            if (MainFrame.jBugunTButton.isSelected() || MainFrame.jDunTButton.isSelected() || MainFrame.jBirAyTButton.isSelected() || MainFrame.jAltiAyTButton.isSelected() || MainFrame.jBirYilTButton.isSelected() || MainFrame.jHepsiTButton.isSelected()) {
-                filters.add(RowFilter.regexFilter(a.toString(), 6));
+            if (MainFrame.jBugunTButton.isSelected() || MainFrame.jDunTButton.isSelected() || MainFrame.jBirAyTButton.isSelected() || MainFrame.jAltiAyTButton.isSelected() || MainFrame.jBirYilTButton.isSelected() || MainFrame.jHepsiTButton.isSelected() || !MainFrame.jModalityCombo.getSelectedItem().equals("")) {
+                filters.add(RowFilter.regexFilter("true", 6));
             } else {
-                filters.add(RowFilter.regexFilter(b.toString(), 6));
+                filters.add(RowFilter.regexFilter("false", 6));
             }
             RowFilter<DefaultTableModel, Object> rf = null;
             rf = RowFilter.andFilter(filters);

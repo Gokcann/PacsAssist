@@ -397,14 +397,14 @@ public class MainFrame extends javax.swing.JFrame {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -10);
         Date sontarih = cal.getTime();
-        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);        
-        
+        actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
+
         /* jModalityCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
+                MainFrame.jModalityCombo.setSelectedItem("");
             }
-        } ); */
+        }); */
     }//GEN-LAST:event_jModalityComboActionPerformed
 
     private void jBugunTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBugunTButtonActionPerformed
@@ -417,6 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
         cal.add(Calendar.DATE, -1);
         Date sontarih = cal.getTime();
         String queryMod = jModalityCombo.getSelectedItem().toString();
+        MainFrame.jModalityCombo.setSelectedItem("");
 
         actions.filtre(jFiltCheck.isSelected(), sontarih, queryMod);
     }//GEN-LAST:event_jBugunTButtonActionPerformed
@@ -498,7 +499,7 @@ public class MainFrame extends javax.swing.JFrame {
     MainFrame(String[][] obj, String urlArgs, String argIP, String argPort) throws IOException {
         //gelen string dizisini Object tipine donustuyoruz tabloya eklemek iciin
         Object[][] data = new Object[obj.length][16];
-        
+
         GetThumb getThumb = new GetThumb();
 
         for (int i = 0; i < obj.length; i++) {
@@ -595,8 +596,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         };
 
-        //jScrollPane1.setOpaque(false);
-        //jScrollPane1.getViewport().setOpaque(false);
         jLabel1.setDisabledIcon(new ImageIcon(getClass().getResource("/null.png")));
         jLabel1.setEnabled(false);
         jTable1.setModel(model);
@@ -626,15 +625,11 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(70);
             jTable1.getColumnModel().getColumn(6).setMaxWidth(100);
         }
-        //DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        //.setHorizontalAlignment( JLabel.CENTER );
-        //j.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
 
         final int[] row = new int[1];
         final int[] column = new int[1];
         final String[] commandString = new String[1];
         final Process[] process = new Process[1];
-      
 
         //sadece tabloyu dinleyen click listener metodu
         jTable1.addMouseListener(new MouseAdapter() {
@@ -693,11 +688,8 @@ public class MainFrame extends javax.swing.JFrame {
                 result[i][14] = dataList.get(i).NumberofStudyRelatedSeriesV2;
 
             }
-
         }
-
         return result;
-
     }
 
     /**
@@ -749,7 +741,6 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
