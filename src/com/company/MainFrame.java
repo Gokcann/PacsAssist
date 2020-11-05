@@ -157,16 +157,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Hasta Bilgileri"));
 
         jPatientName.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPatientName.setText("Hastanın Adı Soyadı     :");
+        jPatientName.setText("Adı Soyadı     :");
 
         jPatientID.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPatientID.setText("Hastanın TC Numarası :");
+        jPatientID.setText("TC Numarası :");
 
         jPatientSex.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPatientSex.setText("Hastanın Cinsiyeti        :");
+        jPatientSex.setText("Cinsiyeti        :");
 
         jPatientBirthDate.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jPatientBirthDate.setText("Hastanın Yaşı              :");
+        jPatientBirthDate.setText("Yaşı              :");
         jPatientBirthDate.setMaximumSize(new java.awt.Dimension(187, 22));
         jPatientBirthDate.setMinimumSize(new java.awt.Dimension(187, 22));
 
@@ -556,8 +556,8 @@ for (int i = 0 ; i < selected.size();i++) {
             //TODO jtable kapatilabilen sutunlar yapilacak(mumkun olmayabilir)
             String isim = obj[i][8];
             String isim1 = isim.replace('^', ' ');
-            jPatientName.setText("Hastanın Adı Soyadı     : " + isim1);
-            jPatientID.setText("Hastanın TC Numarası : " + obj[i][9]);
+            jPatientName.setText("Adı Soyadı     : " + isim1);
+            jPatientID.setText("TC Numarası : " + obj[i][9]);
             String birthdate = obj[i][10].toString();
             int a2 = birthdate.length();
             String bb = Integer.toString(a2);
@@ -589,15 +589,15 @@ for (int i = 0 ; i < selected.size();i++) {
                     ay = y - b;
                 }
                 yil = z - c;
-                jPatientBirthDate.setText("Hastanın Yaşı              : " + yil);
+                jPatientBirthDate.setText("Yaşı              : " + yil);
             }
             String sex = obj[i][11];
             if (sex.equals("F")) {
                 String sex1 = sex.replace("F", "K");
-                jPatientSex.setText("Hastanın Cinsiyeti        : " + sex1);
+                jPatientSex.setText("Cinsiyeti        : " + sex1);
             } else {
                 String sex1 = sex.replace("M", "E");
-                jPatientSex.setText("Hastanın Cinsiyeti        : " + sex1);
+                jPatientSex.setText("Cinsiyeti        : " + sex1);
             }
             String a = obj[i][1].toString();
             if (a.length() != 0) {
