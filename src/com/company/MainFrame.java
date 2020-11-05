@@ -114,6 +114,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         jWeasisButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
+        jWeasisButton.setToolTipText("Weasis");
         jWeasisButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jWeasisButtonActionPerformed(evt);
@@ -123,7 +124,7 @@ public class MainFrame extends javax.swing.JFrame {
         jWebViewerButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jWebViewerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data-transfer.png"))); // NOI18N
         jWebViewerButton.setText("WEB");
-        jWebViewerButton.setToolTipText("");
+        jWebViewerButton.setToolTipText("WEB");
         jWebViewerButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jWebViewerButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jWebViewerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -192,8 +193,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
         );
 
-        Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh.png"))); // NOI18N
-        Yenile.setText("Yenile");
+        Yenile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/refresh1.png"))); // NOI18N
+        Yenile.setToolTipText("Yenile");
         Yenile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Yenile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,21 +210,19 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Yenile, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Yenile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -239,7 +238,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jModalityCombo.setFont(new java.awt.Font("Times New Roman", 0, 28)); // NOI18N
         jModalityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "CT", "PX", "CX", "OT", "XC", "CR", "KO", "IO" }));
-        jModalityCombo.setToolTipText("");
+        jModalityCombo.setToolTipText("Modality Filtresi");
         jModalityCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jModalityComboActionPerformed(evt);
@@ -249,6 +248,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5.setText("Modality Filtresi");
 
         jBugunTButton.setText("Bugün");
+        jBugunTButton.setToolTipText("Bugün");
         jBugunTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBugunTButtonActionPerformed(evt);
@@ -256,6 +256,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jDunTButton.setText("Dün");
+        jDunTButton.setToolTipText("Dün");
         jDunTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDunTButtonActionPerformed(evt);
@@ -263,6 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jBirAyTButton.setText("Son 1 Ay");
+        jBirAyTButton.setToolTipText("Son 1 Ay");
         jBirAyTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBirAyTButtonActionPerformed(evt);
@@ -270,6 +272,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jAltiAyTButton.setText("Son 6 Ay");
+        jAltiAyTButton.setToolTipText("Son 6 Ay");
         jAltiAyTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAltiAyTButtonActionPerformed(evt);
@@ -277,6 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jBirYilTButton.setText("Son 1 Yıl");
+        jBirYilTButton.setToolTipText("Son 1 Yıl");
         jBirYilTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBirYilTButtonActionPerformed(evt);
@@ -284,6 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jHepsiTButton.setText("Hepsini Seç");
+        jHepsiTButton.setToolTipText("Hepsini Seç");
         jHepsiTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jHepsiTButtonActionPerformed(evt);
