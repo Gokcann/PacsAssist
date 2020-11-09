@@ -18,7 +18,7 @@ public class StudyOpen {
             //Process process_mac = new ProcessBuilder("open","/Applications/Weasis.app", link).start();
 
 
-            //System.exit(0);
+            System.exit(0);
 
         } catch (Exception ex) {
 
