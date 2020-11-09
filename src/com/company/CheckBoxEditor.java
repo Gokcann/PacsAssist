@@ -40,6 +40,7 @@ public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
 
     //final int[] rows = new int[1];
     public void itemStateChanged(ItemEvent e) {
+        try {
         this.fireEditingStopped();
         //rows[0] = jTable1.getSelectedRow(); // select a row
         String id = jTable1.getValueAt(row, 4).toString();
@@ -59,5 +60,8 @@ public class CheckBoxEditor extends DefaultCellEditor implements ItemListener {
             }
         }
         System.out.println("//////////////////" + selected.size());
+        }catch(Exception ex) {
+            
+        }
     }
 }
