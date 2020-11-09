@@ -20,6 +20,7 @@ public class UrlCreator {
     public String CreateURLConnector(String ip, String port, List selected) {
 
         if (selected.size() == 1) {
+            //String firstly = "$dicom:close --all" + " , ";
             String first = "$dicom:get -w ";
             String link = "\"http://" + ip + ":" + port;
             String last = "/weasis-pacs-connector/manifest?studyUID=";
@@ -28,23 +29,7 @@ public class UrlCreator {
             return send;
 
         } else {
-            /*
-        String s = selected.get(0).toString();
-        for (int i=1;i<selected.size();i++) {
-        s = s + "&" + "studyUID=" + selected.get(i);
-
-        }
-        String first = "$dicom:get -w ";
-        String link = "\"http://" + ip + ":" + port;
-        String last = "/weasis-pacs-connector/manifest?studyUID=";
-        String uid = s + "\"";
-        String send = first+link+last+uid;
-        System.out.println("*************");
-        System.out.println(send);
-        System.out.println("*************");
-        return send;
-             */
-
+           
             for (int i = 0; i < selected.size() - 1; i++) {
                 String first = "$dicom:get -w ";
                 String link = "\"http://" + ip + ":" + port;
