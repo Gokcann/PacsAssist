@@ -14,8 +14,11 @@ public class StudyOpen {
             //Process process2 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$weasis:ui --quit").start();
             //TimeUnit.SECONDS.sleep(5);
             Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", link).start();
+            //"open","/Applications/Chess.app"
+            //Process process_mac = new ProcessBuilder("open","/Applications/Weasis.app", link).start();
 
-            System.exit(0);
+
+            //System.exit(0);
 
         } catch (Exception ex) {
 
