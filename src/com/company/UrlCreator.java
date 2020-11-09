@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class UrlCreator {
 
@@ -23,6 +24,7 @@ public class UrlCreator {
     //pacs connector link olusturucu
     public String CreateURLConnector(String ip, String port, List selected) throws IOException {
 
+        try {
         if (selected.size() == 1) {
             //String firstly = "$dicom:close --all" + " , ";
             //String first = "$dicom:get -w ";
@@ -62,8 +64,13 @@ public class UrlCreator {
             System.out.println("*************");
             System.out.println(multisend);
             System.out.println("*************");
-            return multisend;
+            //return multisend;
         }
-
+        }catch(Exception ex) {
+            JOptionPane.showMessageDialog(null, "Goruntu weasise aktarilamiyor; Location header failed!");
+        }finally {
+            
+        }
+            return multisend;
     }
 }

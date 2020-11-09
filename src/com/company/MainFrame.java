@@ -23,6 +23,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -691,7 +693,7 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setMinWidth(100);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(175);
             jTable1.getColumnModel().getColumn(3).setMaxWidth(220);
-            jTable1.getColumnModel().getColumn(0).setMinWidth(250);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(150);
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(300);
             jTable1.getColumnModel().getColumn(0).setMaxWidth(500);
             jTable1.getColumnModel().getColumn(5).setMinWidth(0);
@@ -701,6 +703,11 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(70);
             jTable1.getColumnModel().getColumn(6).setMaxWidth(100);
         }
+        
+        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)jTable1.getDefaultRenderer(ImageIcon.class);
+        renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        //renderer.setLocation(50,0);
+        jTable1.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
         final int[] row = new int[1];
         final int[] column = new int[1];

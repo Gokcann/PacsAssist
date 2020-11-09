@@ -74,7 +74,7 @@ public class GetThumb {
         }
 
         Image tmp = img.getScaledInstance(new_width, new_height, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage(200, 100, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage dimg = new BufferedImage(new_width, new_height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = dimg.createGraphics();
         g2d.drawImage(tmp, 0, 0, null);
         g2d.dispose();

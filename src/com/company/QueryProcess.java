@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.JOptionPane;
 
 public class QueryProcess {
 
@@ -51,15 +52,26 @@ public class QueryProcess {
             //parse(responseContent.toString());
 
         } catch (MalformedURLException e) {
+            //JOptionPane.showMessageDialog(null, "Baglanti Hatasi!!");
             e.printStackTrace();
+            //System.exit(0);
         } catch (IOException e) {
+            //JOptionPane.showMessageDialog(null, "Baglanti Hatasi!!");
             e.printStackTrace();
+            //System.exit(0);
         } finally {
-
             connection.disconnect();
+
         }
         //return string buffer type response
-        return responseContent;
+        if(responseContent.toString().length() < 1){
+            JOptionPane.showMessageDialog(null, "Baglanti Hatasi!!");
+            System.exit(0);
+            return responseContent;
+        }else {
+            return responseContent;
+        }
+        
 
 
         /*
