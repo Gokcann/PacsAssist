@@ -1,6 +1,6 @@
 package com.company;
 
-import static com.company.responseBody.location;
+//import static com.company.responseBody.location;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;

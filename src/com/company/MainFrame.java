@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -46,7 +47,6 @@ public class MainFrame extends javax.swing.JFrame {
     public static String queryMod;
     Calendar cal;
     Date sontarih;
-    
 
     /**
      * Creates new form MainFrame
@@ -407,7 +407,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jWebViewerButtonActionPerformed
 
     private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
-      //responseBody.bcd();
+        //responseBody.bcd();
         /* URL obj;
        Object abc = "Location";
        
@@ -440,23 +440,61 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         } */
-        
-        /* String command2 = "curl -X GET \"http://192.168.12.132:8080/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=1.2.40.0.13.20190617082155.59677541026&cdb\" \"http://192.168.12.132:8080/weasis-pacs-connector/weasis?&studyUID=1.2.840.20200723.082732.006.0.192168.010.10.17284&cdb\" \"  --header \"JSESSIONID=F4126fxZ5Ts_osO1J2IG7DGrOctMXrH22gNCnw3C.rontgendeneme\"";
-        try {
+
+ /* String command2 = "curl -X GET \"http://192.168.12.132:8080/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=1.2.40.0.13.20190617082155.59677541026&cdb\" \"http://192.168.12.132:8080/weasis-pacs-connector/weasis?&studyUID=1.2.840.20200723.082732.006.0.192168.010.10.17284&cdb\" \"  --header \"JSESSIONID=F4126fxZ5Ts_osO1J2IG7DGrOctMXrH22gNCnw3C.rontgendeneme\"";
+            try {
             Process process2 = Runtime.getRuntime().exec(command2);
-        } catch (IOException ex) {
+            } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-  try {
+            }
+            
+            try {
             Process process3 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "weasis://%24dicom%3Aget+-w+%22http%3A%2F%2F192.168.12.132%3A8080%2Fweasis-pacs-connector%2FRequestManifest%3Fid%3D5 %22+%24weasis%3Aconfig++cdb+cdb-ext%3D%22http%3A%2F%2F192.168.12.132%3A8080%2Fweasis-ext%22").start();
             //Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$dicom:rs --url \"http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE/rs\" -r \"studyUID=1.2.40.0.13.20190617082155.59677541026\"").start();
-        } catch (IOException ex) {
+            } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.exit(0);
+         */
+        WinRegistry reg = new WinRegistry();
+        try {
+            
+            if (reg.addKey(WinRegistry.WRKey.HKCR, "weasis")) {
+                System.out.println("Key created");
+            } else {
+                System.err.println("Error: could not create the key");
+            }
+
+            // create a new registry key on HKEY_CURRENT_USER\\SOFTWARE\AAAA
+            /*
+            if (reg.addValue(WinRegistry.WRKey.HKCR, "weasis", "URL Protocol", "Weasis URI handler".getBytes(), WinRegistry.WRType.REG_SZ)) {
+                System.out.println("value created");
+            } else {
+                System.err.println("Error: could not create the value");
+            }
+
+            if (reg.addKey(WinRegistry.WRKey.HKCR, "weasis\\shell\\open\\command")) {
+                System.out.println("Key created");
+            } else {
+                System.err.println("Error: could not create the key");
+            }
+            
+            // create a new registry value on HKEY_CURRENT_USER\\SOFTWARE\AAAA  Name: sampleValue Type REG_SZ
+            if (reg.addValue(WinRegistry.WRKey.HKCR, "weasis\\shell\\open\\command", "deneme", "C:\\Metasoft\\weasis-portable\\viewer-win32.exe".getBytes(), WinRegistry.WRType.REG_SZ)) {
+                System.out.println("value created");
+            } else {
+                System.err.println("Error: could not create the value");
+            } */
+
+            // list all registry values at HKEY_CURRENT_USER\\SOFTWARE\AAAA  with subdirectories
+            if (!reg.showAllValues(WinRegistry.WRKey.HKCR, "weasis\\shell\\open\\command", "", true)) {
+                System.err.println("Error: could not show the values");
+            }
+
+        } catch (InterruptedException | IOException e) {
+            System.err.println("An error occurred. " + e.getMessage());
         }
-        System.exit(0);
-*/
-       
+
         if (selected.size() > 0) {
             try {
                 studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
@@ -703,8 +741,8 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(70);
             jTable1.getColumnModel().getColumn(6).setMaxWidth(100);
         }
-        
-        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)jTable1.getDefaultRenderer(ImageIcon.class);
+
+        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) jTable1.getDefaultRenderer(ImageIcon.class);
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
         //renderer.setLocation(50,0);
         jTable1.getColumnModel().getColumn(0).setCellRenderer(renderer);

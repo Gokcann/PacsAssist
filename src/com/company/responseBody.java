@@ -18,14 +18,15 @@ import java.util.Map;
  */
 public class responseBody {
 
-    public static String location;
-/*
+    public static String response;
+
     public static void bcd() {
         try {
             
             URL obj = new URL("http://192.168.12.132:8080/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=1.2.840.20200723.082732.006.0.192168.010.10.17284&cdb");
             URLConnection conn = obj.openConnection();
-            Location = conn.getHeaderField("Location");
+            response = conn.getHeaderField("Location");
+            System.out.print(response);
             
             Map<String, List<String>> map = conn.getHeaderFields();
             //Object abc = "Location";
@@ -38,14 +39,14 @@ public class responseBody {
                 System.out.println("Key : " + entry.getKey()
                         + " ,Value : " + entry.getValue());
             }
-            Process process3 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe",Location).start();
-            System.exit(0);
+            //Process process3 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe",response).start();
+            //System.exit(0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-*/
+/*
     
         public String multisend = "";
 
@@ -103,5 +104,5 @@ public class responseBody {
             return multisend;
         }
 
-    }
+    } */
 }
