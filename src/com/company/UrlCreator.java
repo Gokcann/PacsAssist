@@ -1,13 +1,17 @@
 package com.company;
 
+import static com.company.responseBody.location;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 public class UrlCreator {
 
     public String multisend = "";
+    public static String location;
 
-    //wado link olusturucu
     public String CreateURL(String url, String s) throws MalformedURLException {
 
         String h = "wado?requestType=WADO&studyUID=";
@@ -17,34 +21,43 @@ public class UrlCreator {
     }
 
     //pacs connector link olusturucu
-    public String CreateURLConnector(String ip, String port, List selected) {
+    public String CreateURLConnector(String ip, String port, List selected) throws IOException {
 
         if (selected.size() == 1) {
             //String firstly = "$dicom:close --all" + " , ";
-            String first = "$dicom:get -w ";
-            String link = "\"http://" + ip + ":" + port;
-            String last = "/weasis-pacs-connector/manifest?studyUID=";
-            String uid = selected.get(0) + "\"";
-            String send = first + link + last + uid;
-            return send;
+            //String first = "$dicom:get -w ";
+            String link = "http://" + ip + ":" + port;
+            String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+            String uid = selected.get(0) + "&cdb";
+            String send = link + last + uid;
+            URL obj = new URL(send);
+            URLConnection conn = obj.openConnection();
+            location = conn.getHeaderField("Location");
+            return location;
 
         } else {
            
             for (int i = 0; i < selected.size() - 1; i++) {
-                String first = "$dicom:get -w ";
-                String link = "\"http://" + ip + ":" + port;
-                String last = "/weasis-pacs-connector/manifest?studyUID=";
-                String uid = selected.get(i) + "\"" + " , ";
-                String send = first + link + last + uid;
-                multisend = multisend + send;
+                //String first = "$dicom:get -w ";
+                String link = "http://" + ip + ":" + port;
+                String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+                String uid = selected.get(i) + "&cdb";
+                String send = link + last + uid;
+                URL obj = new URL(send);
+                URLConnection conn = obj.openConnection();
+                location = conn.getHeaderField("Location") + " , ";
+                multisend = multisend + location;
 
             }
-            String first = "$dicom:get -w ";
-            String link = "\"http://" + ip + ":" + port;
-            String last = "/weasis-pacs-connector/manifest?studyUID=";
-            String uid = selected.get(selected.size() - 1) + "\"";
-            String send = first + link + last + uid;
-            multisend = multisend + send;
+            //String first = "$dicom:get -w ";
+            String link = "http://" + ip + ":" + port;
+            String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+            String uid = selected.get(selected.size() - 1) + "&cdb";
+            String send = link + last + uid;
+            URL obj = new URL(send);
+            URLConnection conn = obj.openConnection();
+            location = conn.getHeaderField("Location");
+            multisend = multisend + location;
 
             System.out.println("*************");
             System.out.println(multisend);

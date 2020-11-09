@@ -11,8 +11,8 @@ public class StudyOpen {
         //getscu icin
         Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$dicom:get -l \"C:/PacsAssist\"").start();
              */
-            Process process2 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$weasis:ui --quit").start();
-            TimeUnit.SECONDS.sleep(5);
+            //Process process2 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$weasis:ui --quit").start();
+            //TimeUnit.SECONDS.sleep(5);
             Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", link).start();
 
             System.exit(0);

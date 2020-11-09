@@ -405,7 +405,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jWebViewerButtonActionPerformed
 
     private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
-      responseBody.bcd();
+      //responseBody.bcd();
         /* URL obj;
        Object abc = "Location";
        
@@ -455,11 +455,15 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(0);
 */
        
-        /*if (selected.size() > 0) {
-            studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
+        if (selected.size() > 0) {
+            try {
+                studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         System.out.println("*************");
-        System.out.println(selected.size());*/
+        System.out.println(selected.size());
     }//GEN-LAST:event_jWeasisButtonActionPerformed
 
     private void jModalityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModalityComboActionPerformed

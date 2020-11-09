@@ -5,6 +5,8 @@
  */
 package com.company;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -16,8 +18,8 @@ import java.util.Map;
  */
 public class responseBody {
 
-    public static String Location;
-
+    public static String location;
+/*
     public static void bcd() {
         try {
             
@@ -42,5 +44,64 @@ public class responseBody {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+*/
+    
+        public String multisend = "";
+
+    //wado link olusturucu
+    public String CreateURL(String url, String s) throws MalformedURLException {
+
+        String h = "wado?requestType=WADO&studyUID=";
+        String u = url + h + s;
+
+        return u;
+    }
+
+    //pacs connector link olusturucu
+    public String CreateURLConnector(String ip, String port, List selected) throws IOException {
+
+        if (selected.size() == 1) {
+            //String firstly = "$dicom:close --all" + " , ";
+            //String first = "$dicom:get -w ";
+            String link = "\"http://" + ip + ":" + port;
+            String last = "IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+            String uid = selected.get(0) + "\"";
+            String send = link + last + uid;
+            URL obj = new URL(send);
+            URLConnection conn = obj.openConnection();
+            location = conn.getHeaderField("Location");
+            return location;
+
+        } else {
+           
+            for (int i = 0; i < selected.size() - 1; i++) {
+                //String first = "$dicom:get -w ";
+                String link = "\"http://" + ip + ":" + port;
+                String last = "IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+                String uid = selected.get(i) + "\"" + " , ";
+                String send = link + last + uid;
+                URL obj = new URL(send);
+                URLConnection conn = obj.openConnection();
+                location = conn.getHeaderField("Location");
+                multisend = multisend + " , " + location;
+
+            }
+            //String first = "$dicom:get -w ";
+            String link = "\"http://" + ip + ":" + port;
+            String last = "IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+            String uid = selected.get(selected.size() - 1) + "\"";
+            String send = link + last + uid;
+            URL obj = new URL(send);
+            URLConnection conn = obj.openConnection();
+            location = conn.getHeaderField("Location");
+            multisend = multisend + location;
+
+            System.out.println("*************");
+            System.out.println(multisend);
+            System.out.println("*************");
+            return multisend;
+        }
+
     }
 }
