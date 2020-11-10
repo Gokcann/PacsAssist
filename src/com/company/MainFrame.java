@@ -6,9 +6,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.text.DateFormat;
@@ -739,28 +737,27 @@ public class MainFrame extends javax.swing.JFrame {
         argPort = args[3];
         webPort = args[4];
 
-        String[][] result2 = baslangic();       
-            
-            String root = FileSystems.getDefault().getPath(new String()).toAbsolutePath().toString();
-            
+        String[][] result2 = baslangic();
 
-            String aa = "";
-            try {
-                aa = Advapi32Util.registryGetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", "");
-            } catch (Exception e) {
-            }
-            if (aa.equals("")) {
-                System.out.println("boss");
-                Advapi32Util.registryCreateKey(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command");
-                Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis", "", "Weasis URI handler");
-                Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis", "URL Protocol", "");
-                Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", "", "\"" + root + "\\viewer-win32.exe\" \"%1\"");
-                System.out.println("Yazdırıldı....");
-            } else {
-                System.out.println(Advapi32Util.registryGetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", ""));
-                System.out.print(Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment", "PROCESSOR_ARCHITECTURE"));
-            }
-        
+        String root = FileSystems.getDefault().getPath(new String()).toAbsolutePath().toString();
+
+        String aa = "";
+        try {
+            aa = Advapi32Util.registryGetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", "");
+        } catch (Exception e) {
+        }
+        if (aa.equals("")) {
+            System.out.println("boss");
+            Advapi32Util.registryCreateKey(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command");
+            Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis", "", "Weasis URI handler");
+            Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis", "URL Protocol", "");
+            Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", "", "\"" + root + "\\Weasis.exe\" \"%1\"");
+            System.out.println("Yazdırıldı....");
+        } else {
+            System.out.println(Advapi32Util.registryGetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", ""));
+            System.out.print(Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment", "PROCESSOR_ARCHITECTURE"));
+        }
+
         /* UIManager.put("control", new Color(128, 128, 128));
         UIManager.put("info", new Color(128, 128, 128));
         UIManager.put("nimbusBase", new Color(18, 30, 49));

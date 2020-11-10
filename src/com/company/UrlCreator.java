@@ -25,52 +25,52 @@ public class UrlCreator {
     public String CreateURLConnector(String ip, String port, List selected) throws IOException {
 
         try {
-        if (selected.size() == 1) {
-            //String firstly = "$dicom:close --all" + " , ";
-            //String first = "$dicom:get -w ";
-            String link = "http://" + ip + ":" + port;
-            String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
-            String uid = selected.get(0) + "&cdb";
-            String send = link + last + uid;
-            URL obj = new URL(send);
-            URLConnection conn = obj.openConnection();
-            location = conn.getHeaderField("Location");
-            return location;
-
-        } else {
-           
-            for (int i = 0; i < selected.size() - 1; i++) {
+            if (selected.size() == 1) {
+                //String firstly = "$dicom:close --all" + " , ";
                 //String first = "$dicom:get -w ";
                 String link = "http://" + ip + ":" + port;
                 String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
-                String uid = selected.get(i) + "&cdb";
+                String uid = selected.get(0) + "&cdb";
                 String send = link + last + uid;
                 URL obj = new URL(send);
                 URLConnection conn = obj.openConnection();
-                location = conn.getHeaderField("Location") + " , ";
+                location = conn.getHeaderField("Location");
+                return location;
+
+            } else {
+
+                for (int i = 0; i < selected.size() - 1; i++) {
+                    //String first = "$dicom:get -w ";
+                    String link = "http://" + ip + ":" + port;
+                    String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+                    String uid = selected.get(i) + "&cdb";
+                    String send = link + last + uid;
+                    URL obj = new URL(send);
+                    URLConnection conn = obj.openConnection();
+                    location = conn.getHeaderField("Location") + " , ";
+                    multisend = multisend + location;
+
+                }
+                //String first = "$dicom:get -w ";
+                String link = "http://" + ip + ":" + port;
+                String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
+                String uid = selected.get(selected.size() - 1) + "&cdb";
+                String send = link + last + uid;
+                URL obj = new URL(send);
+                URLConnection conn = obj.openConnection();
+                location = conn.getHeaderField("Location");
                 multisend = multisend + location;
 
+                System.out.println("*************");
+                System.out.println(multisend);
+                System.out.println("*************");
+                //return multisend;
             }
-            //String first = "$dicom:get -w ";
-            String link = "http://" + ip + ":" + port;
-            String last = "/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=";
-            String uid = selected.get(selected.size() - 1) + "&cdb";
-            String send = link + last + uid;
-            URL obj = new URL(send);
-            URLConnection conn = obj.openConnection();
-            location = conn.getHeaderField("Location");
-            multisend = multisend + location;
-
-            System.out.println("*************");
-            System.out.println(multisend);
-            System.out.println("*************");
-            //return multisend;
-        }
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Goruntu weasise aktarilamiyor; Location header failed!");
-        }finally {
-            
+        } finally {
+
         }
-            return multisend;
+        return multisend;
     }
 }

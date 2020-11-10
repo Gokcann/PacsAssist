@@ -12,14 +12,11 @@ public class ColorToggleButton extends JToggleButton {
 
     public void paintComponent(Graphics g) {
         Color bg, text;
-        if (isSelected()) {
-            bg = Color.GRAY;
+        if (isSelected()) {            
             text = Color.RED;
-        } else {
-            bg = Color.GRAY;
+        } else {            
             text = Color.BLACK;
-        }
-        setBackground(bg);
+        }        
         setForeground(text);
         super.paintComponent(g);
     }

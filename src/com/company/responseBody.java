@@ -5,8 +5,6 @@
  */
 package com.company;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -22,12 +20,12 @@ public class responseBody {
 
     public static void bcd() {
         try {
-            
+
             URL obj = new URL("http://192.168.12.132:8080/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=1.2.840.20200723.082732.006.0.192168.010.10.17284&cdb");
             URLConnection conn = obj.openConnection();
             response = conn.getHeaderField("Location");
             System.out.print(response);
-            
+
             Map<String, List<String>> map = conn.getHeaderFields();
             //Object abc = "Location";
             //String abcd = map.get(abc).toString();
@@ -46,6 +44,7 @@ public class responseBody {
             e.printStackTrace();
         }
     }
+}
 /*
     
         public String multisend = "";
@@ -105,4 +104,3 @@ public class responseBody {
         }
 
     } */
-}
