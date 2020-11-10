@@ -1,16 +1,16 @@
 package com.company;
 
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
+import java.nio.file.FileSystems;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -407,102 +405,16 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jWebViewerButtonActionPerformed
 
     private void jWeasisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeasisButtonActionPerformed
-        //responseBody.bcd();
-        /* URL obj;
-       Object abc = "Location";
-       
-        try {
-            obj = new URL("http://192.168.12.132:8080/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=1.2.40.0.13.20190617082155.59677541026&cdb");
-        
-			URLConnection conn = obj.openConnection();
-			Map<String, List<String>> map = conn.getHeaderFields();
-                        String bvc = map.get(abc).toString();
-                        System.out.println(bvc);
-			//System.out.println("Printing All Response Header for URL: " + obj.toString() + "\n");
-			for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-				//System.out.println(entry.getKey() + " : " + entry.getValue());
-                                //responseBody = entry.getValue().get(0).toString();
-                                //System.out.print("*****************"+responseBody);
-			}
-			
-			System.out.println("\nGet Response Header By Key ...\n");
-			List<String> contentLength = map.get("Content-Length");
-			if (contentLength == null) {
-				System.out.println("'Content-Length' doesn't present in Header!");
-			} else {
-				for (String header : contentLength) {
-					System.out.println("Content-Lenght: " + header);
-				}
-			}
-        
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } */
-
- /* String command2 = "curl -X GET \"http://192.168.12.132:8080/weasis-pacs-connector/IHEInvokeImageDisplay?requestType=STUDY&studyUID=1.2.40.0.13.20190617082155.59677541026&cdb\" \"http://192.168.12.132:8080/weasis-pacs-connector/weasis?&studyUID=1.2.840.20200723.082732.006.0.192168.010.10.17284&cdb\" \"  --header \"JSESSIONID=F4126fxZ5Ts_osO1J2IG7DGrOctMXrH22gNCnw3C.rontgendeneme\"";
-            try {
-            Process process2 = Runtime.getRuntime().exec(command2);
-            } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            try {
-            Process process3 = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "weasis://%24dicom%3Aget+-w+%22http%3A%2F%2F192.168.12.132%3A8080%2Fweasis-pacs-connector%2FRequestManifest%3Fid%3D5 %22+%24weasis%3Aconfig++cdb+cdb-ext%3D%22http%3A%2F%2F192.168.12.132%3A8080%2Fweasis-ext%22").start();
-            //Process process = new ProcessBuilder("C:\\Program Files\\Weasis\\Weasis.exe", "$dicom:rs --url \"http://192.168.12.132:8080/dcm4chee-arc/aets/DCM4CHEE/rs\" -r \"studyUID=1.2.40.0.13.20190617082155.59677541026\"").start();
-            } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.exit(0);
-         */
-        WinRegistry reg = new WinRegistry();
-        try {
-            
-            if (reg.addKey(WinRegistry.WRKey.HKCR, "weasis")) {
-                System.out.println("Key created");
-            } else {
-                System.err.println("Error: could not create the key");
-            }
-
-            // create a new registry key on HKEY_CURRENT_USER\\SOFTWARE\AAAA
-            /*
-            if (reg.addValue(WinRegistry.WRKey.HKCR, "weasis", "URL Protocol", "Weasis URI handler".getBytes(), WinRegistry.WRType.REG_SZ)) {
-                System.out.println("value created");
-            } else {
-                System.err.println("Error: could not create the value");
-            }
-
-            if (reg.addKey(WinRegistry.WRKey.HKCR, "weasis\\shell\\open\\command")) {
-                System.out.println("Key created");
-            } else {
-                System.err.println("Error: could not create the key");
-            }
-            
-            // create a new registry value on HKEY_CURRENT_USER\\SOFTWARE\AAAA  Name: sampleValue Type REG_SZ
-            if (reg.addValue(WinRegistry.WRKey.HKCR, "weasis\\shell\\open\\command", "deneme", "C:\\Metasoft\\weasis-portable\\viewer-win32.exe".getBytes(), WinRegistry.WRType.REG_SZ)) {
-                System.out.println("value created");
-            } else {
-                System.err.println("Error: could not create the value");
-            } */
-
-            // list all registry values at HKEY_CURRENT_USER\\SOFTWARE\AAAA  with subdirectories
-            if (!reg.showAllValues(WinRegistry.WRKey.HKCR, "weasis\\shell\\open\\command", "", true)) {
-                System.err.println("Error: could not show the values");
-            }
-
-        } catch (InterruptedException | IOException e) {
-            System.err.println("An error occurred. " + e.getMessage());
-        }
-
-        if (selected.size() > 0) {
+        if (selected.size()
+                > 0) {
             try {
                 studyOpen.StudyOpenWeasis(urlCreator.CreateURLConnector(argIP, argPort, selected));
             } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("*************");
+        System.out.println(
+                "*************");
         System.out.println(selected.size());
     }//GEN-LAST:event_jWeasisButtonActionPerformed
 
@@ -687,7 +599,8 @@ public class MainFrame extends javax.swing.JFrame {
                     data[i][2] = dd + "-" + MM + "-" + yyyy;
                     data[i][5] = ab;
                 } catch (ParseException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainFrame.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
             data[i][1] = obj[i][5] + "  -  " + obj[i][14];
@@ -719,7 +632,8 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(25, 0));
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.getColumnModel().getColumn(6).setCellEditor(new CheckBoxEditor(new JCheckBox()));
-        jTable1.setDefaultEditor(Object.class, null);
+        jTable1.setDefaultEditor(Object.class,
+                null);
         jTable1.setRowHeight(100);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(1).setMinWidth(0);
@@ -742,7 +656,8 @@ public class MainFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setMaxWidth(100);
         }
 
-        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) jTable1.getDefaultRenderer(ImageIcon.class);
+        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) jTable1.getDefaultRenderer(ImageIcon.class
+        );
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
         //renderer.setLocation(50,0);
         jTable1.getColumnModel().getColumn(0).setCellRenderer(renderer);
@@ -824,9 +739,28 @@ public class MainFrame extends javax.swing.JFrame {
         argPort = args[3];
         webPort = args[4];
 
-        String[][] result2 = baslangic();
+        String[][] result2 = baslangic();       
+            
+            String root = FileSystems.getDefault().getPath(new String()).toAbsolutePath().toString();
+            
 
-
+            String aa = "";
+            try {
+                aa = Advapi32Util.registryGetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", "");
+            } catch (Exception e) {
+            }
+            if (aa.equals("")) {
+                System.out.println("boss");
+                Advapi32Util.registryCreateKey(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command");
+                Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis", "", "Weasis URI handler");
+                Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis", "URL Protocol", "");
+                Advapi32Util.registrySetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", "", "\"" + root + "\\viewer-win32.exe\" \"%1\"");
+                System.out.println("Yazdırıldı....");
+            } else {
+                System.out.println(Advapi32Util.registryGetStringValue(WinReg.HKEY_CLASSES_ROOT, "weasis\\shell\\open\\command", ""));
+                System.out.print(Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment", "PROCESSOR_ARCHITECTURE"));
+            }
+        
         /* UIManager.put("control", new Color(128, 128, 128));
         UIManager.put("info", new Color(128, 128, 128));
         UIManager.put("nimbusBase", new Color(18, 30, 49));
@@ -850,13 +784,17 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
